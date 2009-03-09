@@ -3250,3 +3250,7 @@
 		S.buildlinks()
 
 		del(src)
+
+obj/bloodtemplate/New()
+	icon_state = "floor[pick("1","2","3","4","5","6","7")]"
+	return
