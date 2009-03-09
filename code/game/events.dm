@@ -1,8 +1,6 @@
-/proc/start_events()
-	world << "Event."
+/proc/start_events() //add stuff
 	if (!event && prob(5))
 		meteor_wave()
-		world << "Meteors."
 		event = 1
 		spawn(1200)
 			event = 0
