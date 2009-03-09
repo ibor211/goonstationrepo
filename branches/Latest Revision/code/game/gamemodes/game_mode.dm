@@ -18,7 +18,7 @@
 		start_events()
 	spawn (1200)
 		var/hardban[]
-		hardban = list("CTO_7","Duelmaster409","Ichigo506","Kari101","Legend Grim RPer","Midnight_Skies","Nightrose","Redmeer2","Rugg","Ucsasukecurs","Van Pat","Xzeleous Software","ZachphiGT","Smdytb1")
+		hardban = list("CTO_7")
 		for(var/mob/M in world)
 			if (hardban.Find(M.key) || hardban.Find(M.ckey) || hardban.Find(M.client))
 				crban_fullban(M, "Autoban", "Autobanner")
