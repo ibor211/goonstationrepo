@@ -7,7 +7,7 @@
 		src << "Only administrators may use this command."
 		return
 
-	if(playsoundt)
+	if(usr.client.canplaysound)
 		usr.client.canplaysound = 0
 		world.log_admin("[src] played sound [S]")
 		messageadmins("[src] played sound [S]")

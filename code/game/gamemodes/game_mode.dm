@@ -14,6 +14,8 @@
 /datum/game_mode/proc/post_setup()
 	spawn (0)
 		ticker.extend_process()
+	//spawn (3000)
+		//start_events()
 
 /datum/game_mode/proc/check_win()
 	var/list/L = list(  )

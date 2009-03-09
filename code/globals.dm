@@ -1,5 +1,5 @@
 var
-	playsoundt = 1
+	event = 0
 	savefile_ver = "3"
 	SS13_version = "Goonstation + public stable svn"
 	datum/air_tunnel/air_tunnel1/SS13_airtunnel = null
