@@ -12,7 +12,7 @@
 		world.log_admin("[src] played sound [S]")
 		messageadmins("[src] played sound [S]")
 		world << sound(S,0,1,1)
-		spawn(3000)
+		spawn(4200)
 			usr.client.canplaysound = 1
 	else
 		usr << "Cant play sound yet."
