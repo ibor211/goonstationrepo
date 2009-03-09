@@ -3763,7 +3763,7 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	anchored = 1
 	layer = 2
 	icon = 'blood.dmi'
-	icon_state = "floorblood"
+	icon_state = "floor1"
 	blood = null
 /obj/point
 	name = "point"

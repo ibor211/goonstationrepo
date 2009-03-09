@@ -5712,18 +5712,11 @@
 			var/turf/station/source2 = src
 			var/list/objsonturf = range(0,src)
 			var/i
-			var/randomp
-
 			for(i=1, i<=objsonturf.len, i++)
 				if(istype(objsonturf[i],/obj/bloodtemplate))
 					return
 			var/obj/bloodtemplate/this = new /obj/bloodtemplate( source2 )
 			this.blood = M.primarynew.uni_identity
-			randomp = pick("1","2","3","4","5","6","7")
-			this.icon_state = "floor[randomp]"
-
-
-			//randomize here
 
 			//old stuff
 			//source2.icon_old = src.icon
