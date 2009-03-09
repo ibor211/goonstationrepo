@@ -3,12 +3,6 @@
 // New source code should be placed in .dm files: choose File/New --> Code File.
 
 // BEGIN_INTERNALS
-/*
-FILE: code\game\objects\items.dm
-DIR: code code\game code\game\gamemodes code\game\gamemodes\blob code\game\mob code\game\mob\human code\game\objects icons
-MAP_ICON_TYPE: 0
-AUTO_FILE_DIR: ON
-*/
 // END_INTERNALS
 // BEGIN_FILE_DIR
 #define FILE_DIR .
@@ -81,6 +75,7 @@ AUTO_FILE_DIR: ON
 #include "code\game\cellautomata.dm"
 #include "code\game\chemistry.dm"
 #include "code\game\demo.dm"
+#include "code\game\events.dm"
 #include "code\game\hud.dm"
 #include "code\game\throwing.dm"
 #include "code\game\vote.dm"
