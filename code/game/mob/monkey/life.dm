@@ -536,8 +536,8 @@
 			step(src, pick(NORTH, SOUTH, EAST, WEST))
 			if (prob(10))
 				src.emote(pick("drool", "chimper", "scratch", "tail", "sit", "jump"))
-	if (src.primary)
-		src.primary.cleanup()
+	//if (src.primary)
+		//src.primary.cleanup()
 	src.UpdateClothing()
 	src.updatehealth()
 	return

@@ -647,12 +647,20 @@
 				alt_name = " (as [src.wear_id.registered])"
 			else
 				alt_name = " (as Unknown)"
-		step(src, pick(NORTH, SOUTH, EAST, WEST))
+		if (!prob(3))
+			step(src, pick(NORTH, SOUTH, EAST, WEST))
+		else
+			for(var/mob/human/H in viewers(world.view, src)) // Remove this if its too laggy
+				if (H.client)
+					walk_towards(src,H,10)
+					spawn(50)
+						walk(src,0)
+					break
 		if (prob(10))
 			for(var/mob/M in hearers(src, null))
 				M.show_message(text("<B>[]</B>[]: []", src.rname, alt_name, pick(loggedsay)))
-	if (src.primary)
-		src.primary.cleanup()
+	//if (src.primary)
+		//src.primary.cleanup()
 	if (src.buckled)
 		src.lying = (istype(src.buckled, /obj/stool/bed)) ? 1 : 0
 		if(src.lying)
