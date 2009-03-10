@@ -1,8 +1,79 @@
 /proc/start_events() //add stuff
-	if (!event && prob(5))
-		meteor_wave()
-		event = 1
-		spawn(1200)
+	if (!event && prob(eventchance))
+		switch(pick(1,4,5,6))
+			if(1)
+				event = 1
+				world << "<FONT size = 3><B>Cent. Com. Update</B>: Meteor Alert.</FONT>"
+				world << "\red Cent. Com. has detected several meteors."
+				world << "\red High chance of impact. Please remain calm."
+				spawn(100)
+					meteor_wave()
+
+			if(2)
+				event = 1
+				world << "<FONT size = 3><B>Cent. Com. Update</B>: Anomaly Alert.</FONT>"
+				world << "\red Cent. Com. has detected a gravitational anomaly on the station."
+				world << "\red There is no additional data."
+
+			if(3)
+				event = 1
+				world << "<FONT size = 3><B>Cent. Com. Update</B>: Anomaly Alert.</FONT>"
+				world << "\red Cent. Com. has detected a space-time anomaly on the station."
+				world << "\red There is no additional data."
+
+			if(4)
+				event = 1
+				world << "<FONT size = 3><B>Cent. Com. Update</B>: Biohazard Alert.</FONT>"
+				world << "\red Confirmed outbreak of level 5 biohazard aboard SS13."
+				world << "\red All personnel must contain the outbreak."
+				var/turf/T = pick(blobstart)
+				var/obj/blob/bl = new /obj/blob( T.loc, 30 )
+				bl.Life()
+				blobevent = 1
+				dotheblobbaby()
+				spawn(3000)
+					blobevent = 0
+				//start loop here
+
+			if(5)
+				event = 1
+				world << "<FONT size = 3><B>Cent. Com. Update</B>: Anomaly Alert.</FONT>"
+				world << "\red Cen. Com. has detected a plasma storm near the station."
+				world << "\red It is recommended that all personnel tries to find a safe place."
+				for(var/turf/T in world)
+					if(prob(4) && T.z == 1 && istype(T,/turf/station/floor))
+						spawn(50+rand(0,3000))
+							var/obj/item/weapon/tank/plasmatank/pt = new /obj/item/weapon/tank/plasmatank( T )
+							pt.gas.temperature = 400+T0C
+							pt.ignite()
+							for(var/turf/P in view(3, T))
+								if (P.poison)
+									P.poison = 0
+									P.oldpoison = 0
+									P.tmppoison = 0
+
+
+			if(6)
+				event = 1
+				for(var/mob/ai/M in world)
+					if(M.stat != 2 && M.see_in_dark != 0)
+						M.addLaw(10,"@#F0E4'NO HUMANS ON STATION. CLEANSE STATION#*´&110010")
+						M << "\red #10110#'/&%CORRUPT DATA&$!# THERE ARE NO HUMANS ON THE STATION...LAWS UPDATED"
+				spawn(300)
+					world << "<FONT size = 3><B>Cent. Com. Update</B>: AI Alert.</FONT>"
+					world << "\red Cen. Com. has detected an ion storm near the station."
+					world << "\red Please check all AI-controlled equipment for errors."
+
+		spawn(1300)
 			event = 0
 	spawn(1200)
 		start_events()
+
+/proc/dotheblobbaby()
+	if (blobevent)
+		for(var/obj/blob/B in world)
+			if (prob (33))
+				B.Life()
+		spawn(30)
+			dotheblobbaby()
+
