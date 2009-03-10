@@ -1,5 +1,7 @@
 var
+	eventchance = 5
 	event = 0
+	blobevent = 0
 	canplaysound = 1
 	savefile_ver = "3"
 	SS13_version = "Goonstation + public stable svn"
