@@ -222,6 +222,14 @@
 		M.muted = 1
 		usr << "\blue Toggled ON"
 
+/client/proc/revent(number as num)
+	set category = "Admin-Game"
+	set name = "Change event %"
+	if(src.authenticated && src.holder)
+		eventchance = number
+		usr << "\blue Set to [eventchance]%"
+		world.log_admin("[src.key] set the random event chance to [eventchance]%")
+
 /client/proc/funbutton()
 	set category = "Admin-Game"
 	set name = "Random Expl.(REMOVE ME)"

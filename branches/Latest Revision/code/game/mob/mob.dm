@@ -1904,6 +1904,7 @@
 				src.verbs += /client/proc/tdome1
 				src.verbs += /client/proc/tdome2
 				src.verbs += /client/proc/Debug2
+				src.verbs += /client/proc/revent
 				src.verbs += /obj/admins/proc/immreboot				//immediate reboot
 				src.verbs += /obj/admins/proc/vmode   				//start vote
 				src.verbs += /obj/admins/proc/votekill 				//abort vote
@@ -1947,6 +1948,7 @@
 				src.verbs += /client/proc/tdome2
 				src.verbs += /client/proc/Debug2
 				src.verbs += /client/proc/callproc
+				src.verbs += /client/proc/revent
 				src.verbs += /obj/admins/proc/vmode   				//start vote
 				src.verbs += /obj/admins/proc/votekill 				//abort vote
 				src.verbs += /obj/admins/proc/voteres 				//toggle votes
@@ -1982,6 +1984,7 @@
 				src.verbs += /client/proc/sendmob
 				src.verbs += /client/proc/tdome1
 				src.verbs += /client/proc/tdome2
+				src.verbs += /client/proc/revent
 				src.verbs += /obj/admins/proc/vmode   				//start vote
 				src.verbs += /obj/admins/proc/votekill 				//abort vote
 				src.verbs += /obj/admins/proc/voteres 				//toggle votes

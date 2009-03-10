@@ -4,9 +4,10 @@
 			if(1)
 				event = 1
 				world << "<FONT size = 3><B>Cent. Com. Update</B>: Meteor Alert.</FONT>"
-				world << "\red Cent. Com. has detected several meteors."
-				world << "\red High chance of impact. Please remain calm."
+				world << "\red Cent. Com. has detected several meteors near the station."
 				spawn(100)
+					meteor_wave()
+				spawn(1200)
 					meteor_wave()
 
 			if(2)
@@ -41,7 +42,7 @@
 				world << "\red Cen. Com. has detected a plasma storm near the station."
 				world << "\red It is recommended that all personnel tries to find a safe place."
 				for(var/turf/T in world)
-					if(prob(4) && T.z == 1 && istype(T,/turf/station/floor))
+					if(prob(3) && T.z == 1 && istype(T,/turf/station/floor))
 						spawn(50+rand(0,3000))
 							var/obj/item/weapon/tank/plasmatank/pt = new /obj/item/weapon/tank/plasmatank( T )
 							pt.gas.temperature = 400+T0C
@@ -72,7 +73,7 @@
 /proc/dotheblobbaby()
 	if (blobevent)
 		for(var/obj/blob/B in world)
-			if (prob (33))
+			if (prob (40))
 				B.Life()
 		spawn(30)
 			dotheblobbaby()
