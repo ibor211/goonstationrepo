@@ -1984,7 +1984,6 @@
 				src.verbs += /client/proc/sendmob
 				src.verbs += /client/proc/tdome1
 				src.verbs += /client/proc/tdome2
-				src.verbs += /client/proc/revent
 				src.verbs += /obj/admins/proc/vmode   				//start vote
 				src.verbs += /obj/admins/proc/votekill 				//abort vote
 				src.verbs += /obj/admins/proc/voteres 				//toggle votes
