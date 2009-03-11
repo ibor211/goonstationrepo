@@ -984,7 +984,7 @@
 					if(!ticker)
 						alert("The game hasn't started yet!")
 					else
-						alert("The game mode is [master_mode]")
+						alert("The game mode is [ticker.mode.name]")
 
 				if("flicklights")
 					while(!usr.stat)	//knock yourself out to stop the ghosts
