@@ -5470,12 +5470,15 @@
 		else
 	return
 
-/obj/watertank/attackby(obj/item/weapon/extinguisher/W as obj, mob/user as mob)
-	if (!( istype(W, /obj/item/weapon/extinguisher) ))
-		return
-	W.waterleft = 20
-	W.suffix = text("[][]", (user.equipped() == src ? "equipped " : ""), W.waterleft)
-	user << "\blue Extinguisher refueled"
+/obj/watertank/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/extinguisher))
+		W:waterleft = 20
+		W:suffix = text("[][]", (user.equipped() == src ? "equipped " : ""), W:waterleft)
+		user << "\blue Extinguisher refueled"
+	else if (istype(W, /obj/item/weapon/cleaner))
+		W:water = 8
+		W:suffix = text("[][]", (user.equipped() == src ? "equipped " : ""), W:water)
+		user << "\blue Cleaner refilled"
 	return
 
 /obj/watertank/ex_act(severity)

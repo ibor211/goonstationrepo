@@ -1,11 +1,3 @@
-/obj/watertank/attackby(obj/item/weapon/cleaner/W as obj, mob/user as mob)
-	if (!( istype(W, /obj/item/weapon/cleaner) ))
-		return
-	W.water = 8
-	W.suffix = text("[][]", (user.equipped() == src ? "equipped " : ""), W.water)
-	user << "\blue Cleaner refilled"
-	return
-
 /obj/item/weapon/cleaner/attack(mob/human/M as mob, mob/user as mob)
 	return
 
