@@ -297,8 +297,9 @@
 			else
 				t1 += "<a href='?src=\ref[src];apcwires=[apcwires[wiredesc]]'>Cut</a> "
 				t1 += "<a href='?src=\ref[src];pulse=[apcwires[wiredesc]]'>Pulse</a> "
-			t1 += "<br>"
+			t1 += "<br><br>"
 
+			t1 += "<br><br>"
 		t1 += text("<p><a href='?src=\ref[];close2=1'>Close</a></p>\n", src)
 		user << browse(t1, "window=apcwires")
 
@@ -404,7 +405,6 @@
 		area.power_light = 0
 		area.power_equip = 0
 		area.power_environ = 0
-
 	area.power_change()
 
 /obj/machinery/power/apc/proc/isWireColorCut(var/wireColor)
@@ -415,31 +415,37 @@
 	var/wireFlag = APCIndexToFlag[wireIndex]
 	return ((src.apcwires & wireFlag) == 0)
 
-
 /obj/machinery/power/apc/proc/cut(var/wireColor)
 	var/wireFlag = APCWireColorToFlag[wireColor]
 	var/wireIndex = APCWireColorToIndex[wireColor]
 	apcwires &= ~wireFlag
 	switch(wireIndex)
-		if(APC_WIRE_MAIN_POWER1 || APC_WIRE_MAIN_POWER2)
-			//Cutting either one disables the main door power, but unless backup power is also cut, the backup power re-powers the door in 10 seconds. While unpowered, the door may be crowbarred open, but bolts-raising will not work. Cutting these wires may electocute the user.
+		if(APC_WIRE_MAIN_POWER1)
+			src.electrocute(usr, 100, 1)			//this doesn't work for some reason, give me a while I'll figure it out
+			src.shorted = 1
+			src.updateUsrDialog()
+		if(APC_WIRE_MAIN_POWER2)
 			src.electrocute(usr, 100, 1)
 			src.shorted = 1
 			src.updateUsrDialog()
 		if (APC_WIRE_AI_CONTROL)
-			//one wire for AI control. Cutting this prevents the AI from controlling the door unless it has hacked the door through the power connection (which takes about a minute). If both main and backup power are cut, as well as this wire, then the AI cannot operate or hack the door at all.
-			//aidisabled: If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
 			if (src.aidisabled == 0)
 				src.aidisabled = 1
-
 			src.updateUsrDialog()
+//		if(APC_WIRE_IDSCAN)		nothing happens when you cut this wire, add in something if you want whatever
+
 
 /obj/machinery/power/apc/proc/mend(var/wireColor)
 	var/wireFlag = APCWireColorToFlag[wireColor]
 	var/wireIndex = APCWireColorToIndex[wireColor] //not used in this function
 	apcwires |= wireFlag
 	switch(wireIndex)
-		if(APC_WIRE_MAIN_POWER1 || APC_WIRE_MAIN_POWER2)
+		if(APC_WIRE_MAIN_POWER1)
+			if ((!src.isWireCut(APC_WIRE_MAIN_POWER1)) && (!src.isWireCut(APC_WIRE_MAIN_POWER2)))
+				src.shorted = 0
+				src.electrocute(usr, 100, 1)
+				src.updateUsrDialog()
+		if(APC_WIRE_MAIN_POWER2)
 			if ((!src.isWireCut(APC_WIRE_MAIN_POWER1)) && (!src.isWireCut(APC_WIRE_MAIN_POWER2)))
 				src.shorted = 0
 				src.electrocute(usr, 100, 1)
@@ -450,20 +456,25 @@
 			if (src.aidisabled == 1)
 				src.aidisabled = 0
 			src.updateUsrDialog()
-
+//		if(APC_WIRE_IDSCAN)		nothing happens when you cut this wire, add in something if you want whatever
 
 /obj/machinery/power/apc/proc/pulse(var/wireColor)
 	//var/wireFlag = apcWireColorToFlag[wireColor] //not used in this function
 	var/wireIndex = APCWireColorToIndex[wireColor]
 	switch(wireIndex)
-		if(APC_WIRE_IDSCAN)
-			//Sending a pulse through this flashes the red light on the door (if the door has power).
+		if(APC_WIRE_IDSCAN)			//unlocks the APC for 30 seconds, if you have a better way to hack an APC I'm all ears
 			src.locked = 0
 			spawn(300)
 				src.locked = 1
 				src.updateDialog()
-		if (APC_WIRE_MAIN_POWER1 || APC_WIRE_MAIN_POWER2)
-			//Sending a pulse through either one causes a breaker to trip, disabling the door for 10 seconds if backup power is connected, or 1 minute if not (or until backup power comes back on, whichever is shorter).
+		if (APC_WIRE_MAIN_POWER1)
+			if(shorted == 0)
+				shorted = 1
+			spawn(600)
+				if(shorted == 1)
+					shorted = 0
+				src.updateDialog()
+		if (APC_WIRE_MAIN_POWER2)
 			if(shorted == 0)
 				shorted = 1
 			spawn(600)
