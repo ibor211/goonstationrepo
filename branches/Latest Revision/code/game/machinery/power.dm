@@ -545,6 +545,7 @@
 
 
 /atom/proc/electrocute(mob/user, prb, netnum)
+
 	if(!prob(prb))
 		return 0
 

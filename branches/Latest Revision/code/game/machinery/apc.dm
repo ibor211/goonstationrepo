@@ -414,17 +414,91 @@
 	var/wireFlag = APCIndexToFlag[wireIndex]
 	return ((src.apcwires & wireFlag) == 0)
 
+/obj/machinery/power/apc/proc/get_connection()
+	if(stat & BROKEN)	return 0
+	return 1
+
+/obj/machinery/power/apc/proc/shock(mob/user, prb)
+	if(!prob(prb))
+		return 0
+	var/net = get_connection()		// find the powernet of the connected cable
+	if(!net)		// cable is unpowered
+		return 0
+	return src.apcelectrocute(user, prb, net)
+
+/obj/machinery/power/apc/proc/apcelectrocute(mob/user, prb, netnum)
+
+	if(!prob(prb))
+		return 0
+
+	if(!netnum)		// unconnected cable is unpowered
+		return 0
+
+	var/prot = 0
+
+	if(istype(user, /mob/human))
+		var/mob/human/H = user
+		if(H.gloves)
+			var/obj/item/weapon/clothing/gloves/G = H.gloves
+			prot = G.elec_protect
+	else if (istype(user, /mob/ai))
+		return 0
+
+	if(prot == 10)		// elec insulted gloves protect completely
+		return 0
+
+	prot++
+
+	var/obj/effects/sparks/O = new /obj/effects/sparks( src.loc )
+	O.dir = pick(NORTH, SOUTH, EAST, WEST)
+	spawn( 0 )
+		O.Life()
+
+	var/shock_damage = 0
+	if(cell_type == 2500)	//someone juiced up the grid enough, people going to die!
+		shock_damage = min(rand(70,145),rand(70,145))/prot
+		cell_type = cell_type - 2000
+	else if(cell_type >= 1750)
+		shock_damage = min(rand(35,110),rand(35,110))/prot
+		cell_type = cell_type - 1600
+	else if(cell_type >= 1500)
+		shock_damage = min(rand(30,100),rand(30,100))/prot
+		cell_type = cell_type - 1000
+	else if(cell_type >= 750)
+		shock_damage = min(rand(25,90),rand(25,90))/prot
+		cell_type = cell_type - 500
+	else if(cell_type >= 250)
+		shock_damage = min(rand(20,80),rand(20,80))/prot
+		cell_type = cell_type - 125
+	else if(cell_type >= 100)
+		shock_damage = min(rand(20,65),rand(20,65))/prot
+		cell_type = cell_type - 50
+	else
+		return 0
+
+	user.burn_skin(shock_damage)
+	user << "\red <B>You feel a powerful shock course through your body!</B>"
+	sleep(1)
+
+	if(user.stunned < shock_damage)	user.stunned = shock_damage
+	if(user.weakened < 20/prot)	user.weakened = 20/prot
+	for(var/mob/M in viewers(src))
+		if(M == user)	continue
+		M.show_message("\red [user.name] was shocked by the [src.name]!", 3, "\red You hear a heavy electrical crack", 2)
+	return 1
+
+
 /obj/machinery/power/apc/proc/cut(var/wireColor)
 	var/wireFlag = APCWireColorToFlag[wireColor]
 	var/wireIndex = APCWireColorToIndex[wireColor]
 	apcwires &= ~wireFlag
 	switch(wireIndex)
 		if(APC_WIRE_MAIN_POWER1)
-			src.electrocute(usr, 100, 1)			//this doesn't work for some reason, give me a while I'll figure it out
+			src.shock(usr, 50)			//this doesn't work for some reason, give me a while I'll figure it out
 			src.shorted = 1
 			src.updateUsrDialog()
 		if(APC_WIRE_MAIN_POWER2)
-			src.electrocute(usr, 100, 1)
+			src.shock(usr, 50)
 			src.shorted = 1
 			src.updateUsrDialog()
 		if (APC_WIRE_AI_CONTROL)
@@ -442,12 +516,12 @@
 		if(APC_WIRE_MAIN_POWER1)
 			if ((!src.isWireCut(APC_WIRE_MAIN_POWER1)) && (!src.isWireCut(APC_WIRE_MAIN_POWER2)))
 				src.shorted = 0
-				src.electrocute(usr, 100, 1)
+				src.shock(usr, 50)
 				src.updateUsrDialog()
 		if(APC_WIRE_MAIN_POWER2)
 			if ((!src.isWireCut(APC_WIRE_MAIN_POWER1)) && (!src.isWireCut(APC_WIRE_MAIN_POWER2)))
 				src.shorted = 0
-				src.electrocute(usr, 100, 1)
+				src.shock(usr, 50)
 				src.updateUsrDialog()
 		if (APC_WIRE_AI_CONTROL)
 			//one wire for AI control. Cutting this prevents the AI from controlling the door unless it has hacked the door through the power connection (which takes about a minute). If both main and backup power are cut, as well as this wire, then the AI cannot operate or hack the door at all.
@@ -469,14 +543,14 @@
 		if (APC_WIRE_MAIN_POWER1)
 			if(shorted == 0)
 				shorted = 1
-			spawn(600)
+			spawn(1200)
 				if(shorted == 1)
 					shorted = 0
 				src.updateDialog()
 		if (APC_WIRE_MAIN_POWER2)
 			if(shorted == 0)
 				shorted = 1
-			spawn(600)
+			spawn(1200)
 				if(shorted == 1)
 					shorted = 0
 				src.updateDialog()
