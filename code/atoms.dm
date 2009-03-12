@@ -2402,6 +2402,17 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	flags = 322.0
 	w_class = 2.0
 	s_istate = "electronic"
+
+/obj/item/weapon/teleportation_scroll
+	name = "Teleportation Scroll"
+	icon_state = "paper"
+	var/uses = 4.0
+	flags = 322.0
+	w_class = 2.0
+	s_istate = "paper"
+	throw_speed = 4
+	throw_range = 20
+
 /obj/item/weapon/weldingtool
 	name = "weldingtool"
 	icon_state = "welder"

@@ -93,6 +93,11 @@
 //	killer.verbs += /client/proc/teleport
 //	killer.verbs += /client/proc/clone
 //	killer.verbs += /client/proc/blink
+	var/obj/starting_location = locate("landmark*Wizard")
+	killer << "\blue <B>You have been teleported to your new starting location!</B>"
+	killer.loc = starting_location.loc
+	var/obj/telescroll = locate("landmark*Telescroll")
+	new /obj/item/weapon/teleportation_scroll(telescroll.loc)
 	del(killer.wear_suit)
 	del(killer.head)
 	del(killer.shoes)
@@ -608,7 +613,7 @@
 		else if (href_list["spell_teleport"])
 			if (src.uses >= 1)
 				src.uses -= 1
-				usr.verbs += /client/proc/teleport
+				usr.verbs += /mob/proc/teleport
 				src.temp = "This spell teleports you to a type of area of your selection. Very useful if you are in danger, but has a decent cooldown, and is unpredictable."
 		else if (href_list["spell_temp"])
 			if (src.uses >= 1)

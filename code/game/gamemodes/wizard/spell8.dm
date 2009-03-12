@@ -24,10 +24,10 @@
 	if(!istype(usr:shoes, /obj/item/weapon/clothing/shoes/sandal))
 		usr << "I don't feel strong enough without my sandals."
 		return
-	if(!istype(usr:head, 	/obj/item/weapon/clothing/head/wizhat))
+	if(!istype(usr:head, /obj/item/weapon/clothing/head/wizhat))
 		usr << "I don't feel strong enough without my hat."
 		return
-	if(!istype(usr.equipped(), /obj/item/weapon/staff))
+	if(!istype(usr:l_hand, /obj/item/weapon/staff) && !istype(usr:r_hand, /obj/item/weapon/staff))
 		usr << "I don't feel strong enough without my staff."
 		return
 	var/turf/T = usr.loc
