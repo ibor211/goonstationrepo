@@ -324,7 +324,6 @@
 		src << "\blue <B>You have been teleported to your new starting location!</B>"
 		src.loc = O.loc
 		src.AIize()
-//		world << "Algorithm.dm seems to be working"
 		return
 	else if (rank == "AI")
 		var/obj/S = locate(text("start*[]", rank))

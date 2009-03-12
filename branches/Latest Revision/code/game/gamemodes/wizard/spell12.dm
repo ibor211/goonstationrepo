@@ -1,4 +1,4 @@
-/client/proc/teleport()
+/mob/proc/teleport()
 	set category = "Spells"
 	set name = "Teleport"
 	set desc="Teleport"
@@ -11,10 +11,10 @@
 	if(!istype(usr:shoes, /obj/item/weapon/clothing/shoes/sandal))
 		usr << "I don't feel strong enough without my sandals."
 		return
-	if(!istype(usr:head, 	/obj/item/weapon/clothing/head/wizhat))
+	if(!istype(usr:head, /obj/item/weapon/clothing/head/wizhat))
 		usr << "I don't feel strong enough without my hat."
 		return
-	if(!istype(usr.equipped(), /obj/item/weapon/staff))
+	if(!istype(usr:l_hand, /obj/item/weapon/staff) && !istype(usr:r_hand, /obj/item/weapon/staff))
 		usr << "I don't feel strong enough without my staff."
 		return
 //	set desc = "Area to jump to"
@@ -22,9 +22,9 @@
 
 //	if(src.authenticated && src.holder)
 	var/A
-	usr.verbs -= /client/proc/teleport
+	usr.verbs -= /mob/proc/teleport
 	spawn(450)
-		usr.verbs += /client/proc/teleport
+		usr.verbs += /mob/proc/teleport
 	A = input("Area to jump to", "BOOYEA", A) in list("Engine","Hallways","Toxins","Storage","Maintenance","Crew Quarters","Medical","Security","Chapel","Bridge")
 
 	switch (A)
