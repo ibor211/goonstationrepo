@@ -16,6 +16,8 @@
 	spawn(10)
 		start_state = new /datum/station_state()
 		start_state.count()
+	spawn (3000)
+		start_events()
 
 	spawn (20)
 		var/turf/T = pick(blobstart)

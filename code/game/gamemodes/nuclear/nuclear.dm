@@ -74,6 +74,8 @@
 			H.w_radio = R
 
 /datum/game_mode/nuclear/post_setup()
+	spawn (3000)
+		start_events()
 	spawn ( 0 )
 		randomchems()
 	spawn (50)
