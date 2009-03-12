@@ -7,6 +7,7 @@ Want the source? <a href="https://OpenSVN.csie.org/goonstationsvn">Nannek/Keelin
 
 <HR>
 <P><B>Modified Saturday 7th March, 2009</B><BR>
+<li>Fixed Memory and made it more efficient in the code</li>
 <li>Crowbars now open apcs, not screwdrivers. They do something else entirely</li>
 <li>Hackable APCs</li>
 <li>When APCs are emagged they now stay unlocked</li>

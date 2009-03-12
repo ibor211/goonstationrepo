@@ -297,10 +297,9 @@
 			else
 				t1 += "<a href='?src=\ref[src];apcwires=[apcwires[wiredesc]]'>Cut</a> "
 				t1 += "<a href='?src=\ref[src];pulse=[apcwires[wiredesc]]'>Pulse</a> "
-			t1 += "<br><br>"
-
-			t1 += "<br><br>"
-		t1 += text("<p><a href='?src=\ref[];close2=1'>Close</a></p>\n", src)
+			t1 += "<br>"
+		t1 += text("<br>\n[(src.locked ? "The APC is locked." : "The APC is unlocked.")]<br>\n[(src.shorted ? "The APCs power has been shorted." : "The APC is working properly!")]<br>\n[(src.aidisabled ? "The 'AI control allowed' light is off." : "The 'AI control allowed' light is on.")]")
+		t1 += text("<p><a href='?src=\ref[src];close2=1'>Close</a></p>\n")
 		user << browse(t1, "window=apcwires")
 
 	user.machine = src

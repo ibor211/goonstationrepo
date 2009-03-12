@@ -1269,15 +1269,16 @@
 */
 
 /mob/verb/memory()
-	var revs = "<HR>"
-	if(ticker.mode.name == "revolution" && src.is_rev > 0)
-		revs += "<B>Revolutionaries:</B><BR>"
+	var/dat = "<B>Memory:</B><HR>[src.memory]"
+	if(ticker && ticker.mode.name == "revolution" && src.is_rev > 0)
+		var/revs = "<HR><B>Revolutionaries:</B><BR>"
 		for(var/mob/M in ticker.revs)
 			revs += "[M.name]"
 			if(M.is_rev == 2)
 				revs += " (leader)"
 			revs += "<BR>"
- 	src << browse("<B>Memory:</B><HR>[src.memory] [revs]", "window=memory")
+		dat += " [revs]"
+	src << browse(dat, "window=memory")
 
 /mob/verb/add_memory(msg as message)
 	store_memory(msg, 1, 1)
