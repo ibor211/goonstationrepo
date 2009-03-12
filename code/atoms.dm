@@ -3753,7 +3753,7 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	name = "Kick Mine"
 	icon = 'traps.dmi'
 	icon_state = "uglymine"
-	range = 10
+	range = 1
 	senserate = 10
 	triggerproc = "triggerkick"
 
