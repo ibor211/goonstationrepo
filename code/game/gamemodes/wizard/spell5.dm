@@ -7,13 +7,16 @@ client/proc/hide(obj/item/weapon/T as obj in view(1))
 		usr << "Not when you're dead!"
 		return
 	if(!istype(usr:wear_suit, /obj/item/weapon/clothing/suit/wizrobe))
-		usr << "I don't feel strong enough to use this spell"
+		usr << "I don't feel strong enough without my robe."
 		return
 	if(!istype(usr:shoes, /obj/item/weapon/clothing/shoes/sandal))
-		usr << "I don't feel strong enough to use this spell"
+		usr << "I don't feel strong enough without my sandals."
 		return
 	if(!istype(usr:head, 	/obj/item/weapon/clothing/head/wizhat))
-		usr << "I don't feel strong enough to use this spell"
+		usr << "I don't feel strong enough without my hat."
+		return
+	if(!istype(usr.equipped(), /obj/item/weapon/staff))
+		usr << "I don't feel strong enough without my staff."
 		return
 	var/backup = T.icon_state
 	var/mob/human/G = usr

@@ -2058,6 +2058,15 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
+/obj/item/weapon/staff
+	name = "wizards staff"
+	icon_state = "staff"
+	force = 3.0
+	throwforce = 5.0
+	throw_speed = 1
+	throw_range = 5
+	w_class = 2.0
+	flags = 290.0
 /obj/item/weapon/storage
 	name = "storage"
 	var/obj/screen/storage/boxes = null
@@ -2143,7 +2152,6 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	flags = 322.0
 	force = 8.0
 	w_class = 4.0
-
 
 /obj/item/weapon/storage/trackimp_kit
 	name = "Tracking Implant Kit"
