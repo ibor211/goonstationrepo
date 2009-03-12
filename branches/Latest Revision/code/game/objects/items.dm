@@ -5981,7 +5981,7 @@
 		if (href_list["spell_teleport"])
 			if (src.uses >= 1)
 				src.uses -= 1
-				usr.teleport()
+				usr.teleportscroll()
 		if (istype(src.loc, /mob))
 			attack_self(src.loc)
 		else
