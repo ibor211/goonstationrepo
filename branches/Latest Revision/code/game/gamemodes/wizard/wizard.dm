@@ -96,12 +96,15 @@
 	del(killer.wear_suit)
 	del(killer.head)
 	del(killer.shoes)
+	del(killer.r_hand)
 	killer.wear_suit = new /obj/item/weapon/clothing/suit/wizrobe(killer)
 	killer.wear_suit.layer = 20
 	killer.head = new /obj/item/weapon/clothing/head/wizhat(killer)
 	killer.head.layer = 20
 	killer.shoes = new /obj/item/weapon/clothing/shoes/sandal(killer)
 	killer.shoes.layer = 20
+	killer.r_hand = new /obj/item/weapon/staff(killer)
+	killer.r_hand.layer = 20
 	switch (objective)
 
 		if(obj_hijack)
