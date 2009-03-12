@@ -7,6 +7,8 @@
 	world << "<B>The space station has been stuck in a major meteor shower. You must escape from the station or at least live.</B>"
 
 /datum/game_mode/meteor/post_setup()
+	spawn (3000)
+		start_events()
 	spawn (0)
 		randomchems()
 		ticker.meteor_process()

@@ -50,6 +50,8 @@
 	world << "<B>There is a \red SPACE WIZARD\black on the station. You can't let him achieve his objective!</B>"
 
 /datum/game_mode/wizard/post_setup()
+	spawn (3000)
+		start_events()
 	spawn ( 0 )
 		randomchems()
 	var/list/mobs = get_mob_list()

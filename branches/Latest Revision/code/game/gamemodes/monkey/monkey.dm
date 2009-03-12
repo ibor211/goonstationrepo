@@ -8,6 +8,8 @@
 	world << "<B>Escape on the shuttle but the humans have precedence!</B>"
 
 /datum/game_mode/monkey/post_setup()
+	spawn (3000)
+		start_events()
 	spawn ( 0 )
 		randomchems()
 	spawn (50)

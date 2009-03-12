@@ -8,6 +8,8 @@
 
 
 /datum/game_mode/restructuring/post_setup()
+	spawn (3000)
+		start_events()
 	spawn ( 0 )
 		randomchems()
 	var/list/mobs = get_mob_list()

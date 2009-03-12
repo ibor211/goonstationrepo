@@ -9,6 +9,8 @@ datum/game_mode/malfunction
 	world << "The AI satellite is deep in space and can only be accessed with the use of a teleporter! You have 30 minutes to disable it."
 
 /datum/game_mode/malfunction/post_setup()
+	spawn (3000)
+		start_events()
 	spawn ( 0 )
 		randomchems()
 	for (var/obj/landmark/A in world)
