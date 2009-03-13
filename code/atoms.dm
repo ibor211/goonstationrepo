@@ -737,6 +737,16 @@
 		access = get_access("Captain")
 		..()
 
+/obj/item/weapon/bucket
+	desc = "It's a bucket."
+	name = "bucket"
+	icon_state = "bucket"
+	force = 3.0
+	var/water = 20
+	throwforce = 5.0
+	throw_speed = 1
+	throw_range = 5
+	w_class = 2.0
 /obj/item/weapon/cleaner
 	desc = "Space Cleaner! Just add water."
 	name = "space cleaner"
@@ -1652,6 +1662,15 @@ obj/item/weapon/clothing/suit/labcoat
 	name = "red/blue pill"
 /obj/item/weapon/m_pill/superpill
 	name = "red/blue pill"
+/obj/item/weapon/mop
+	desc = "The world of janitalia wouldn't be complete without a mop."
+	name = "mop"
+	icon_state = "mop"
+	force = 3.0
+	throwforce = 5.0
+	throw_speed = 1
+	throw_range = 5
+	w_class = 2.0
 /obj/item/weapon/ointment
 	name = "ointment"
 	icon_state = "ointment"
@@ -3909,6 +3928,15 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	density = 1
 	anchored = 1.0
 
+/obj/mopbucket
+	desc = "Fill it with water, but don't forget a mop!"
+	name = "mop bucket"
+	icon = 'stationobjs.dmi'
+	icon_state = "mopbucket"
+	var/water = 20
+	density = 1
+	flags = FPRINT
+	weight = 5000000.0
 /obj/watertank
 	name = "watertank"
 	icon = 'stationobjs.dmi'
