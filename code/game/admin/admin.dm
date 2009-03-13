@@ -1,215 +1,3 @@
-////////////////////////////////admins2.dm merge
-/obj/admins/proc/vmode()
-	set category = "Admin-Game"
-	set name = "Start Vote"
-	set desc="Starts vote"
-	var/confirm = alert("What vote would you like to start?", "Vote", "Restart", "Change Game Mode", "Cancel")
-	if(confirm == "Cancel")
-		return
-	if(confirm == "Restart")
-		vote.mode = 0 	// hack to yield 0=restart, 1=changemode
-	if(confirm == "Change Game Mode")
-		vote.mode = 1
-	vote.voting = 1						// now voting
-	vote.votetime = world.timeofday + config.vote_period*10	// when the vote will end
-	spawn(config.vote_period*10)
-		vote.endvote()
-	world << "\red<B>*** A vote to [vote.mode?"change game mode":"restart"] has been initiated by Admin [usr.key].</B>"
-	world << "\red     You have [vote.timetext(config.vote_period)] to vote."
-
-	world.log_admin("Voting to [vote.mode?"change mode":"restart round"] forced by admin [usr.key]")
-
-	for(var/mob/CM in world)
-		if(CM.client)
-			if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2) || !CM.client.authenticated)
-				CM.client.vote = "none"
-			else
-				CM.client.vote = "default"
-
-	for(var/mob/CM in world)
-		if(CM.client)
-			if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2) || !CM.client.authenticated)
-				CM.client.vote = "none"
-			else
-				CM.client.vote = "default"
-/obj/admins/proc/votekill()
-	set category = "Admin-Game"
-	set name = "Abort Vote"
-	set desc="Aborts a vote"
-	world << "\red <B>***Voting aborted by [usr.key].</B>"
-
-	world.log_admin("Voting aborted by [usr.key]")
-
-	vote.voting = 0
-	vote.nextvotetime = world.timeofday + 10*config.vote_delay
-
-	for(var/mob/M in world)		// clear vote window from all clients
-		if(M.client)
-			M << browse(null, "window=vote")
-			M.client.showvote = 0
-
-/obj/admins/proc/voteres()
-	set category = "Admin-Game"
-	set name = "Toggle Voting"
-	set desc="Toggles Votes"
-	var/confirm = alert("What vote would you like to toggle?", "Vote", "Restart [config.allow_vote_restart ? "Off" : "On"]", "Change Game Mode [config.allow_vote_mode ? "Off" : "On"]", "Cancel")
-	if(confirm == "Cancel")
-		return
-	if(confirm == "Restart [config.allow_vote_restart ? "Off" : "On"]")
-		config.allow_vote_restart = !config.allow_vote_restart
-		world << "<B>Player restart voting toggled to [config.allow_vote_restart ? "On" : "Off"]</B>."
-		world.log_admin("Restart voting toggled to [config.allow_vote_restart ? "On" : "Off"] by [usr.key].")
-
-		if(config.allow_vote_restart)
-			vote.nextvotetime = world.timeofday
-	if(confirm == "Change Game Mode [config.allow_vote_mode ? "Off" : "On"]")
-		config.allow_vote_mode = !config.allow_vote_mode
-		world << "<B>Player mode voting toggled to [config.allow_vote_mode ? "On" : "Off"]</B>."
-		world.log_admin("Mode voting toggled to [config.allow_vote_mode ? "On" : "Off"] by [usr.key].")
-
-		if(config.allow_vote_mode)
-			vote.nextvotetime = world.timeofday
-
-/obj/admins/proc/restart()
-	set category = "Admin-Game"
-	set name = "Restart"
-	set desc="Restarts the world"
-	var/confirm = alert("Restart the game world?", "Restart", "Yes", "Cancel")
-	if(confirm == "Cancel")
-		return
-	if(confirm == "Yes")
-		world << text("\red <B> Restarting world!</B>\blue  Initiated by []!", usr.key)
-		world.log_admin("[usr.key] initiated a reboot.")
-		sleep(50)
-		world.Reboot()
-
-/obj/admins/proc/announce()
-	set category = "Admin-Game"
-	set name = "Announce"
-	set desc="Announce your desires to the world"
-	var/t = input("Global message to send:", "Admin Announce", null, null)  as message
-	if (t)
-		world << "\blue <B>[usr.key] Announces:</B>\n \t [t]"
-		world.log_admin("Announce: [usr.key] : [t]")
-
-/obj/admins/proc/toggleooc()
-	set category = "Admin-Game"
-	set desc="Toggle dis bitch"
-	set name="Toggle OOC"
-	ooc_allowed = !( ooc_allowed )
-	if (ooc_allowed)
-		world << "<B>The OOC channel has been globally enabled!</B>"
-	else
-		world << "<B>The OOC channel has been globally disabled!</B>"
-	world.log_admin("[usr.key] toggled OOC.")
-	messageadmins("<font color='blue'>[usr.key] toggled OOC.</font>")
-
-/obj/admins/proc/startnow()
-	set category = "Admin-Game"
-	set desc="Start the round RIGHT NOW"
-	set name="Start Now"
-	if (!ticker)
-		world << "<B>The game will now start immediately thanks to [usr.key]!</B>"
-		going = 1
-		ticker = new /datum/control/gameticker()
-		spawn (0)
-			world.log_admin("[usr.key] used start_now")
-			ticker.process()
-		data_core = new /obj/datacore()
-	else alert("Game has already started you fucking jerk, stop spamming up the chat :ARGH:")
-
-/obj/admins/proc/toggleenter()
-	set category = "Admin-Game"
-	set desc="People can't enter"
-	set name="Toggle Entering"
-	enter_allowed = !( enter_allowed )
-	if (!( enter_allowed ))
-		world << "<B>You may no longer enter the game.</B>"
-	else
-		world << "<B>You may now enter the game.</B>"
-	world.log_admin("[usr.key] toggled new player game entering.")
-	messageadmins("\blue[usr.key] toggled new player game entering.")
-	world.update_stat()
-
-/obj/admins/proc/toggleAI()
-	set category = "Admin-Game"
-	set desc="People can't be AI"
-	set name="Toggle AI"
-	config.allow_ai = !( config.allow_ai )
-	if (!( config.allow_ai ))
-		world << "<B>The AI job is no longer chooseable.</B>"
-	else
-		world << "<B>The AI job is chooseable now.</B>"
-	world.log_admin("[usr.key] toggled AI allowed.")
-	world.update_stat()
-
-/obj/admins/proc/toggleaban()
-	set category = "Admin-Game"
-	set desc="Respawn basically"
-	set name="Toggle Abandon"
-	abandon_allowed = !( abandon_allowed )
-	if (abandon_allowed)
-		world << "<B>You may now abandon mob.</B>"
-	else
-		world << "<B>You may no longer abandon mob :(</B>"
-	messageadmins("\blue[usr.key] toggled abandon mob to [abandon_allowed ? "On" : "Off"].")
-	world.log_admin("[usr.key] toggled abandon mob to [abandon_allowed ? "On" : "Off"].")
-	world.update_stat()
-
-/obj/admins/proc/delay()
-	set category = "Admin-Game"
-	set desc="Delay the game start"
-	set name="Delay"
-	if (ticker)
-		return alert("Too late... The game has already started!", null, null, null, null, null)
-	going = !( going )
-	if (!( going ))
-		world << "<B>The game start has been delayed.</B>"
-		world.log_admin("[usr.key] delayed the game.")
-	else
-		world << "<B>The game will start soon.</B>"
-		world.log_admin("[usr.key] removed the delay.")
-
-/obj/admins/proc/adjump()
-	set category = "Admin-Game"
-	set desc="Toggle admin jumping"
-	set name="Toggle Jump"
-	config.allow_admin_jump = !(config.allow_admin_jump)
-	messageadmins("\blue Toggled admin jumping to [config.allow_admin_jump].")
-
-/obj/admins/proc/adspawn()
-	set category = "Admin-Game"
-	set desc="Toggle admin spawning"
-	set name="Toggle Spawn"
-	config.allow_admin_spawning = !(config.allow_admin_spawning)
-	messageadmins("\blue Toggled admin item spawning to [config.allow_admin_spawning].")
-
-/obj/admins/proc/adrev()
-	set category = "Admin-Game"
-	set desc="Toggle admin revives"
-	set name="Toggle Revive"
-	config.allow_admin_rev = !(config.allow_admin_rev)
-	messageadmins("\blue Toggled reviving to [config.allow_admin_rev].")
-
-
-/obj/admins/proc/immreboot()
-	set category = "Admin-Game"
-	set desc="Reboots the server post haste"
-	set name="Immediate Reboot"
-	if( alert("Reboot server?",,"Yes","No") == "No")
-		return
-	world << text("\red <B> Rebooting world!</B>\blue  Initiated by []!", usr.key)
-	world.log_admin("[usr.key] initiated an immediate reboot.")
-	world.Reboot()
-
-//
-//
-//ALL DONE
-//*********************************************************************************************************
-//TO-DO:
-//
-//
-
 ////////////////////////////////
 /proc/messageadmins(text as text)
 	for(var/mob/M in world)
@@ -270,20 +58,22 @@
 		var/jobs = ""
 		for(var/job in (alljobs))
 			if(jobban_isbanned(M,job))
-				jobs += "<a href='?src=\ref[src];jobban3=[M][job]'><font color=red>[dd_replacetext(job, " ", "&nbsp")]</font></a> "
+				jobs += "<a href='?src=\ref[src];jobban3=[job]'><font color=red>[dd_replacetext(job, " ", "&nbsp")]</font></a> "
 			else
-				jobs += "<a href='?src=\ref[src];jobban3=[M][job]'>[dd_replacetext(job, " ", "&nbsp")]</a> " //why doesn't this work the stupid cunt
+				jobs += "<a href='?src=\ref[src];jobban3=[job]'>[dd_replacetext(job, " ", "&nbsp")]</a> " //why doesn't this work the stupid cunt
 		body = "<br>[jobs]<br><br>"
 		dat = "<tt>[header][body]</tt>"
 		usr << browse(dat, "window=jobban2;size=700x375")
 
 	if(href_list["jobban3"])
 		if (src.rank in list( "Administrator", "Secondary Administrator", "Primary Administrator", "Coder", "Host"  ))
-			var/mob/M = locate(href_list["jobban3"])
+			var/mob/M = locate(href_list["jobban2"])
 			var/job = locate(href_list["jobban3"])
+			world << "jobban3"
 			if ((M.client && M.client.holder && (M.client.holder.level >= src.level)))
 				alert("You cannot perform this action. You must be of a higher administrative rank!")
 				return
+			world << "pretty sure this doesn't work"
 			if (jobban_isbanned(M, job))
 				world.log_admin("[usr.key] unbanned [M.key]/[M.rname] from [job]")
 				messageadmins("\blue[usr.key] unbanned [M.key]/[M.rname] from [job]")
@@ -1168,3 +958,229 @@
 			dat = text("<center><B>Abuse Control Center</B></center><hr>\n<A href='?src=\ref[];access=1'>Access Admin Commands</A><br>\n<A href='?src=\ref[];contact=1'>Contact Admins</A><br>\n<A href='?src=\ref[];message=1'>Access Messageboard</A><br>\n<br>\n<A href='?src=\ref[];l_keys=1'>List Keys</A><br>\n<A href='?src=\ref[];l_players=1'>List Players/Keys</A><br>\n<A href='?src=\ref[];g_send=1'>Send Global Message</A><br>\n<A href='?src=\ref[];p_send=1'>Send Private Message</A><br>", src, src, src, src, src, src, src)
 	usr << browse(dat, "window=admin2")
 	return
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////admins2.dm merge
+
+
+
+
+
+
+
+
+/obj/admins/proc/vmode()
+	set category = "Admin-Game"
+	set name = "Start Vote"
+	set desc="Starts vote"
+	var/confirm = alert("What vote would you like to start?", "Vote", "Restart", "Change Game Mode", "Cancel")
+	if(confirm == "Cancel")
+		return
+	if(confirm == "Restart")
+		vote.mode = 0 	// hack to yield 0=restart, 1=changemode
+	if(confirm == "Change Game Mode")
+		vote.mode = 1
+	vote.voting = 1						// now voting
+	vote.votetime = world.timeofday + config.vote_period*10	// when the vote will end
+	spawn(config.vote_period*10)
+		vote.endvote()
+	world << "\red<B>*** A vote to [vote.mode?"change game mode":"restart"] has been initiated by Admin [usr.key].</B>"
+	world << "\red     You have [vote.timetext(config.vote_period)] to vote."
+
+	world.log_admin("Voting to [vote.mode?"change mode":"restart round"] forced by admin [usr.key]")
+
+	for(var/mob/CM in world)
+		if(CM.client)
+			if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2) || !CM.client.authenticated)
+				CM.client.vote = "none"
+			else
+				CM.client.vote = "default"
+
+	for(var/mob/CM in world)
+		if(CM.client)
+			if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2) || !CM.client.authenticated)
+				CM.client.vote = "none"
+			else
+				CM.client.vote = "default"
+/obj/admins/proc/votekill()
+	set category = "Admin-Game"
+	set name = "Abort Vote"
+	set desc="Aborts a vote"
+	world << "\red <B>***Voting aborted by [usr.key].</B>"
+
+	world.log_admin("Voting aborted by [usr.key]")
+
+	vote.voting = 0
+	vote.nextvotetime = world.timeofday + 10*config.vote_delay
+
+	for(var/mob/M in world)		// clear vote window from all clients
+		if(M.client)
+			M << browse(null, "window=vote")
+			M.client.showvote = 0
+
+/obj/admins/proc/voteres()
+	set category = "Admin-Game"
+	set name = "Toggle Voting"
+	set desc="Toggles Votes"
+	var/confirm = alert("What vote would you like to toggle?", "Vote", "Restart [config.allow_vote_restart ? "Off" : "On"]", "Change Game Mode [config.allow_vote_mode ? "Off" : "On"]", "Cancel")
+	if(confirm == "Cancel")
+		return
+	if(confirm == "Restart [config.allow_vote_restart ? "Off" : "On"]")
+		config.allow_vote_restart = !config.allow_vote_restart
+		world << "<B>Player restart voting toggled to [config.allow_vote_restart ? "On" : "Off"]</B>."
+		world.log_admin("Restart voting toggled to [config.allow_vote_restart ? "On" : "Off"] by [usr.key].")
+
+		if(config.allow_vote_restart)
+			vote.nextvotetime = world.timeofday
+	if(confirm == "Change Game Mode [config.allow_vote_mode ? "Off" : "On"]")
+		config.allow_vote_mode = !config.allow_vote_mode
+		world << "<B>Player mode voting toggled to [config.allow_vote_mode ? "On" : "Off"]</B>."
+		world.log_admin("Mode voting toggled to [config.allow_vote_mode ? "On" : "Off"] by [usr.key].")
+
+		if(config.allow_vote_mode)
+			vote.nextvotetime = world.timeofday
+
+/obj/admins/proc/restart()
+	set category = "Admin-Game"
+	set name = "Restart"
+	set desc="Restarts the world"
+	var/confirm = alert("Restart the game world?", "Restart", "Yes", "Cancel")
+	if(confirm == "Cancel")
+		return
+	if(confirm == "Yes")
+		world << text("\red <B> Restarting world!</B>\blue  Initiated by []!", usr.key)
+		world.log_admin("[usr.key] initiated a reboot.")
+		sleep(50)
+		world.Reboot()
+
+/obj/admins/proc/announce()
+	set category = "Admin-Game"
+	set name = "Announce"
+	set desc="Announce your desires to the world"
+	var/t = input("Global message to send:", "Admin Announce", null, null)  as message
+	if (t)
+		world << "\blue <B>[usr.key] Announces:</B>\n \t [t]"
+		world.log_admin("Announce: [usr.key] : [t]")
+
+/obj/admins/proc/toggleooc()
+	set category = "Admin-Game"
+	set desc="Toggle dis bitch"
+	set name="Toggle OOC"
+	ooc_allowed = !( ooc_allowed )
+	if (ooc_allowed)
+		world << "<B>The OOC channel has been globally enabled!</B>"
+	else
+		world << "<B>The OOC channel has been globally disabled!</B>"
+	world.log_admin("[usr.key] toggled OOC.")
+	messageadmins("<font color='blue'>[usr.key] toggled OOC.</font>")
+
+/obj/admins/proc/startnow()
+	set category = "Admin-Game"
+	set desc="Start the round RIGHT NOW"
+	set name="Start Now"
+	if (!ticker)
+		world << "<B>The game will now start immediately thanks to [usr.key]!</B>"
+		going = 1
+		ticker = new /datum/control/gameticker()
+		spawn (0)
+			world.log_admin("[usr.key] used start_now")
+			ticker.process()
+		data_core = new /obj/datacore()
+	else alert("Game has already started you fucking jerk, stop spamming up the chat :ARGH:")
+
+/obj/admins/proc/toggleenter()
+	set category = "Admin-Game"
+	set desc="People can't enter"
+	set name="Toggle Entering"
+	enter_allowed = !( enter_allowed )
+	if (!( enter_allowed ))
+		world << "<B>You may no longer enter the game.</B>"
+	else
+		world << "<B>You may now enter the game.</B>"
+	world.log_admin("[usr.key] toggled new player game entering.")
+	messageadmins("\blue[usr.key] toggled new player game entering.")
+	world.update_stat()
+
+/obj/admins/proc/toggleAI()
+	set category = "Admin-Game"
+	set desc="People can't be AI"
+	set name="Toggle AI"
+	config.allow_ai = !( config.allow_ai )
+	if (!( config.allow_ai ))
+		world << "<B>The AI job is no longer chooseable.</B>"
+	else
+		world << "<B>The AI job is chooseable now.</B>"
+	world.log_admin("[usr.key] toggled AI allowed.")
+	world.update_stat()
+
+/obj/admins/proc/toggleaban()
+	set category = "Admin-Game"
+	set desc="Respawn basically"
+	set name="Toggle Abandon"
+	abandon_allowed = !( abandon_allowed )
+	if (abandon_allowed)
+		world << "<B>You may now abandon mob.</B>"
+	else
+		world << "<B>You may no longer abandon mob :(</B>"
+	messageadmins("\blue[usr.key] toggled abandon mob to [abandon_allowed ? "On" : "Off"].")
+	world.log_admin("[usr.key] toggled abandon mob to [abandon_allowed ? "On" : "Off"].")
+	world.update_stat()
+
+/obj/admins/proc/delay()
+	set category = "Admin-Game"
+	set desc="Delay the game start"
+	set name="Delay"
+	if (ticker)
+		return alert("Too late... The game has already started!", null, null, null, null, null)
+	going = !( going )
+	if (!( going ))
+		world << "<B>The game start has been delayed.</B>"
+		world.log_admin("[usr.key] delayed the game.")
+	else
+		world << "<B>The game will start soon.</B>"
+		world.log_admin("[usr.key] removed the delay.")
+
+/obj/admins/proc/adjump()
+	set category = "Admin-Game"
+	set desc="Toggle admin jumping"
+	set name="Toggle Jump"
+	config.allow_admin_jump = !(config.allow_admin_jump)
+	messageadmins("\blue Toggled admin jumping to [config.allow_admin_jump].")
+
+/obj/admins/proc/adspawn()
+	set category = "Admin-Game"
+	set desc="Toggle admin spawning"
+	set name="Toggle Spawn"
+	config.allow_admin_spawning = !(config.allow_admin_spawning)
+	messageadmins("\blue Toggled admin item spawning to [config.allow_admin_spawning].")
+
+/obj/admins/proc/adrev()
+	set category = "Admin-Game"
+	set desc="Toggle admin revives"
+	set name="Toggle Revive"
+	config.allow_admin_rev = !(config.allow_admin_rev)
+	messageadmins("\blue Toggled reviving to [config.allow_admin_rev].")
+
+
+/obj/admins/proc/immreboot()
+	set category = "Admin-Game"
+	set desc="Reboots the server post haste"
+	set name="Immediate Reboot"
+	if( alert("Reboot server?",,"Yes","No") == "No")
+		return
+	world << text("\red <B> Rebooting world!</B>\blue  Initiated by []!", usr.key)
+	world.log_admin("[usr.key] initiated an immediate reboot.")
+	world.Reboot()
+
+//
+//
+//ALL DONE
+//*********************************************************************************************************
+//TO-DO:
+//
+//
