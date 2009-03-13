@@ -42,21 +42,26 @@
 		return
 
 	if(href_list["jobban2"])
-		var/mob/M = locate(href_list["jobban2"])
-		var/dat = ""
-		var/header = "<b>Pick Job to ban this guy from.<br>"
-		var/body
-		var/list/alljobs = get_all_jobs()
-		var/jobs = ""
-		for(var/job in (alljobs))
-			if(jobban_isbanned(M, job))
-				jobs += "<a href='?src=\ref[src];jobban3=\ref[job];jobban4=\ref[M]'><font color=red>[dd_replacetext(job, " ", "&nbsp")]</font></a> "
-			else
-				jobs += "<a href='?src=\ref[src];jobban3=\ref[job];jobban4=\ref[M]'>[dd_replacetext(job, " ", "&nbsp")]</a> " //why doesn't this work the stupid cunt
-		body = "<br>[jobs]<br><br>"
-		dat = "<tt>[header][body]</tt>"
-		world << "[M.key] acessed jobban 2"
-		usr << browse(dat, "window=jobban2;size=700x375")
+		if(src.rank == "Coder")
+			var/mob/M = locate(href_list["jobban2"])
+			var/dat = ""
+			var/header = "<b>Pick Job to ban this guy from.<br>"
+			var/body
+			var/list/alljobs = get_all_jobs()
+			var/jobs = ""
+			for(var/job in (alljobs))
+				if(jobban_isbanned(M, job))
+					jobs += "<a href='?src=\ref[src];jobban3=\ref[job];jobban4=\ref[M]'><font color=red>[dd_replacetext(job, " ", "&nbsp")]</font></a> "
+				else
+					jobs += "<a href='?src=\ref[src];jobban3=\ref[job];jobban4=\ref[M]'>[dd_replacetext(job, " ", "&nbsp")]</a> " //why doesn't this work the stupid cunt
+			body = "<br>[jobs]<br><br>"
+			dat = "<tt>[header][body]</tt>"
+			world << "[M.key] acessed jobban 2"
+			usr << browse(dat, "window=jobban2;size=700x375")
+		else
+			alert("No go away")
+			del(src)
+			return
 
 	if(href_list["jobban3"])
 		if (src.rank in list( "Administrator", "Secondary Administrator", "Primary Administrator", "Coder", "Host"  ))
@@ -446,12 +451,12 @@
 	if (href_list["playeropts"])
 		var/mob/M = locate(href_list["playeropts"])
 		var/dat = "<html><head><title>Options for [M.key]</title></head>"
-		var/foo = ""
+		var/foo = "\[ "
 		if (ismob(M) && M.client)
 			if(!M.client.authenticated && !M.client.authenticating)
-				foo += text("\[ <A HREF='?src=\ref[];adminauth=\ref[]'>Authorize</A> | ", src, M)
+				foo += text("<A HREF='?src=\ref[];adminauth=\ref[]'>Authorize</A> | ", src, M)
 			else
-				foo += text("\[ <B>Authorized</B> | ")
+				foo += text("<B>Authorized</B> | ")
 			if(M.start)
 				if(!istype(M, /mob/monkey))
 					foo += text("<A HREF='?src=\ref[];monkeyone=\ref[]'>Monkeyize</A> | ", src, M)
