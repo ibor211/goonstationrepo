@@ -742,7 +742,7 @@
 	name = "bucket"
 	icon_state = "bucket"
 	force = 3.0
-	var/water = 20
+	var/water = 0
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
@@ -1666,6 +1666,7 @@ obj/item/weapon/clothing/suit/labcoat
 	desc = "The world of janitalia wouldn't be complete without a mop."
 	name = "mop"
 	icon_state = "mop"
+	var/wet = 0
 	force = 3.0
 	throwforce = 5.0
 	throw_speed = 1
