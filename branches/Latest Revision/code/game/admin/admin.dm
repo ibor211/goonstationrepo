@@ -41,14 +41,6 @@
 		world.log_admin("[usr.key]/[usr.rname] tried to use the admin panel without authorization.")
 		return
 
-	if(href_list["jobban1"])
-		if ((src.rank in list( "Administrator", "Secondary Administrator", "Primary Administrator", "Coder", "Host"  )))
-			var/dat = "<B>Ban Player:</B><HR>"
-			for(var/mob/M in world)
-				dat += text("<A href='?src=\ref[src];jobban2=[M]'>N: <B>[M.name]</B> R: [M.rname] (K: [(M.client ? M.client : "No client")]) (IP: [M.lastKnownIP])</A><BR>")
-			usr << browse(dat, "window=jobban1;size=800x600")
-
-
 	if(href_list["jobban2"])
 		var/mob/M = locate(href_list["jobban2"])
 		var/dat = ""
@@ -57,23 +49,23 @@
 		var/list/alljobs = get_all_jobs()
 		var/jobs = ""
 		for(var/job in (alljobs))
-			if(jobban_isbanned(M,job))
-				jobs += "<a href='?src=\ref[src];jobban3=[job]'><font color=red>[dd_replacetext(job, " ", "&nbsp")]</font></a> "
+			if(jobban_isbanned(M, job))
+				jobs += "<a href='?src=\ref[src];jobban3=\ref[job];jobban4=\ref[M]'><font color=red>[dd_replacetext(job, " ", "&nbsp")]</font></a> "
 			else
-				jobs += "<a href='?src=\ref[src];jobban3=[job]'>[dd_replacetext(job, " ", "&nbsp")]</a> " //why doesn't this work the stupid cunt
+				jobs += "<a href='?src=\ref[src];jobban3=\ref[job];jobban4=\ref[M]'>[dd_replacetext(job, " ", "&nbsp")]</a> " //why doesn't this work the stupid cunt
 		body = "<br>[jobs]<br><br>"
 		dat = "<tt>[header][body]</tt>"
+		world << "[M.key] acessed jobban 2"
 		usr << browse(dat, "window=jobban2;size=700x375")
 
 	if(href_list["jobban3"])
 		if (src.rank in list( "Administrator", "Secondary Administrator", "Primary Administrator", "Coder", "Host"  ))
-			var/mob/M = locate(href_list["jobban2"])
+			var/mob/M = locate(href_list["jobban4"])
 			var/job = locate(href_list["jobban3"])
-			world << "jobban3"
-			if ((M.client && M.client.holder && (M.client.holder.level >= src.level)))
-				alert("You cannot perform this action. You must be of a higher administrative rank!")
-				return
-			world << "pretty sure this doesn't work"
+			world << "[M.key] [job]"
+//			if ((M.client && M.client.holder && (M.client.holder.level >= src.level)))
+//				alert("You cannot perform this action. You must be of a higher administrative rank!")
+//				return
 			if (jobban_isbanned(M, job))
 				world.log_admin("[usr.key] unbanned [M.key]/[M.rname] from [job]")
 				messageadmins("\blue[usr.key] unbanned [M.key]/[M.rname] from [job]")
@@ -480,6 +472,7 @@
 			foo += text("<A HREF='?src=\ref[src];forcespeech=\ref[M]'>Say</A> | ")
 			foo += text("<A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A> | ")
 			foo += text("<A href='?src=\ref[src];mute2=\ref[M]'>Mute: [(M.muted ? "Muted" : "Voiced")]</A> | ")
+			foo += text("<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> | ")
 			foo += text("<A href='?src=\ref[src];boot2=\ref[M]'>Boot</A> | ")
 		foo += text("<A href='?src=\ref[src];ban2=\ref[M]'>Ban</A> \]")
 		dat += text("<body>[foo]</body></html>")
@@ -891,29 +884,22 @@
 //			if(lvl > 0)
 
 //			if(lvl >= 3)
-
 			dat += "<BR>"
-
 			if(lvl >= 2 )
 
 				dat += "<A href='?src=\ref[src];l_keys=1'>List Keys</A><br>"
 				dat += "<A href='?src=\ref[src];l_players=1'>List Players/Keys</A><br>"
 				dat += "<A href='?src=\ref[src];tratmenu=1'>Traitor Menu</A><br>"
 
-			dat += "<BR>"
 
-			if(lvl >= 5)
-				dat += "DEBUG STUFF<br>"
-				dat += "<A href='?src=\ref[src];jobban1=1'>Job Bans</A><br>"
-				dat += "END OF DEBUG STUFF<br>"
+//			if(lvl >= 5)
 
-			dat += "<BR>"
 
 //			if(lvl == 6 )
 
 		else
 			dat = text("<center><B>Abuse Control Center</B></center><hr>\n<A href='?src=\ref[];access=1'>Access Admin Commands</A><br>\n<A href='?src=\ref[];contact=1'>Contact Admins</A><br>\n<A href='?src=\ref[];message=1'>Access Messageboard</A><br>\n<br>\n<A href='?src=\ref[];l_keys=1'>List Keys</A><br>\n<A href='?src=\ref[];l_players=1'>List Players/Keys</A><br>\n<A href='?src=\ref[];g_send=1'>Send Global Message</A><br>\n<A href='?src=\ref[];p_send=1'>Send Private Message</A><br>", src, src, src, src, src, src, src)
-	usr << browse(dat, "window=admin")
+	usr << browse(dat, "window=admin;size=210x160")
 	return
 
 /obj/admins/proc/update2()
@@ -956,7 +942,7 @@
 
 		else
 			dat = text("<center><B>Abuse Control Center</B></center><hr>\n<A href='?src=\ref[];access=1'>Access Admin Commands</A><br>\n<A href='?src=\ref[];contact=1'>Contact Admins</A><br>\n<A href='?src=\ref[];message=1'>Access Messageboard</A><br>\n<br>\n<A href='?src=\ref[];l_keys=1'>List Keys</A><br>\n<A href='?src=\ref[];l_players=1'>List Players/Keys</A><br>\n<A href='?src=\ref[];g_send=1'>Send Global Message</A><br>\n<A href='?src=\ref[];p_send=1'>Send Private Message</A><br>", src, src, src, src, src, src, src)
-	usr << browse(dat, "window=admin2")
+	usr << browse(dat, "window=admin2;size=210x160")
 	return
 
 
