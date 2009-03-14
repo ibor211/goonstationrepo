@@ -195,6 +195,7 @@
 			M << "\blue Your muscles hurt."
 			M.ishulk = 1
 			M.anchored = 1
+			M.unlock_medal("It's Not Easy Being Green", 1)
 	if (isblockon(getblock(M.primarynew.struc_enzyme, 3,3),3))
 		M.disabilities |= 2
 		M << "\red You get a headache."

@@ -1785,6 +1785,7 @@ obj/item/weapon/chemistry/attackby(obj/item/weapon/R as obj, mob/user as mob)
 //				if prob(50)
 //					M.clumsy = 1
 				M.ishulk = 1
+				M.unlock_medal("It's Not Easy Being Green", 1)
 				spawn (3600)
 					M.ishulk = 0
 				M << text("\blue You feel ANGRY!")
