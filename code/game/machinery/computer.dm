@@ -506,6 +506,7 @@
 				else
 					accesses += "<a href='?src=\ref[src];access=[A];allowed=1'>[dd_replacetext(get_access_desc(A), " ", "&nbsp")]</a> "
 			body = "[carddesc]<br>[jobs]<br><br>[accesses]"
+			user.unlock_medal("Identity Theft", 1)
 		else
 			body = "<a href='?src=\ref[src];auth=1'>{Log in}</a>"
 		dat = "<tt>[header][body]<hr><a href='?src=\ref[src];mode=1'>Access Crew Manifest</a><br></tt>"
