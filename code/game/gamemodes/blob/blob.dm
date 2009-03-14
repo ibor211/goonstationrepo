@@ -18,7 +18,8 @@
 		start_state.count()
 	spawn (3000)
 		start_events()
-
+	spawn ((18000+rand(3000)))
+		force_event()
 	spawn (20)
 		var/turf/T = pick(blobstart)
 

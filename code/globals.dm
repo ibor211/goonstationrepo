@@ -1,6 +1,7 @@
 var
-	eventchance = 5
+	eventchance = 2
 	event = 0
+	hadevent = 0
 	blobevent = 0
 	canplaysound = 1
 	savefile_ver = "3"
