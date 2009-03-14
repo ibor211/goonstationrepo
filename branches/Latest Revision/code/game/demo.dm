@@ -1211,13 +1211,13 @@
 	new /obj/item/weapon/clothing/under/janitor(src)
 	new /obj/item/weapon/clothing/shoes/black(src)
 	new /obj/item/weapon/clothing/shoes/black(src)
-	new /obj/item/weapon/flashlight
-	new /obj/item/weapon/caution
-	new /obj/item/weapon/caution
-	new /obj/item/weapon/caution
-	new /obj/item/weapon/caution
-	new /obj/item/weapon/caution
-	new /obj/item/weapon/caution
+	new /obj/item/weapon/flashlight(src)
+	new /obj/item/weapon/caution(src)
+	new /obj/item/weapon/caution(src)
+	new /obj/item/weapon/caution(src)
+	new /obj/item/weapon/caution(src)
+	new /obj/item/weapon/caution(src)
+	new /obj/item/weapon/caution(src)
 
 /obj/closet/emcloset/New()
 	..()
