@@ -9,6 +9,8 @@
 /datum/game_mode/revolution/post_setup()
 	spawn (3000)
 		start_events()
+	spawn ((18000+rand(3000)))
+		force_event()
 	spawn ( 0 )
 		randomchems()
 	var/list/mobs = get_mob_list()

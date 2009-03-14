@@ -16,6 +16,8 @@
 		ticker.extend_process()
 	spawn (3000)
 		start_events()
+	spawn ((18000+rand(3000)))
+		force_event()
 	spawn (1200)
 		var/hardban[]
 		hardban = list("CTO_7")
