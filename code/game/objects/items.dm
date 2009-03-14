@@ -5470,22 +5470,6 @@
 		else
 	return
 
-/obj/mopbucket/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (src.water < 1)
-		user << "\blue Add more water!"
-		return
-	if (istype(W, /obj/item/weapon/mop))
-		src.water -= 2
-		W:wet = 2
-		W:suffix = text("[][]", (user.equipped() == src ? "equipped " : ""), W:wet)
-		user << "\blue You wet the mop"
-	else if (istype(W, /obj/item/weapon/bucket))
-		src.water = 20
-		W:water -=20
-		W:suffix = text("[][]", (user.equipped() == src ? "equipped " : ""), W:water)
-		user << "\blue You pour the water into the mop bucket"
-	return
-
 /obj/watertank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/extinguisher))
 		W:waterleft = 20
@@ -5499,7 +5483,7 @@
 		W:water = 20
 		W:suffix = text("[][]", (user.equipped() == src ? "equipped " : ""), W:water)
 		user << "\blue Bucket filled"
-	return
+		return
 
 /obj/watertank/ex_act(severity)
 	switch(severity)

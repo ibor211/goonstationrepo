@@ -67,6 +67,7 @@
 	name = "station"
 	intact = 1
 	var/icon_old = null
+	var/wet = 0
 
 /turf/station/command
 	name = "command"

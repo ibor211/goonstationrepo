@@ -3934,8 +3934,8 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	name = "mop bucket"
 	icon = 'stationobjs.dmi'
 	icon_state = "mopbucket"
-	var/water = 20
 	density = 1
+	var/water = 0
 	flags = FPRINT
 	weight = 5000000.0
 /obj/watertank

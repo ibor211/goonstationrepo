@@ -1205,13 +1205,13 @@
 /obj/closet/jcloset/New()
 	..()
 	sleep(2)
-	new /obj/item/weapon/flashlight
-	new /obj/item/weapon/clothing/under/janitor(src)
-	new /obj/item/weapon/clothing/under/janitor(src)
-	new /obj/item/weapon/clothing/shoes/black(src)
-	new /obj/item/weapon/clothing/shoes/black(src)
 	new /obj/item/weapon/clothing/suit/bio_suit(src)
 	new /obj/item/weapon/clothing/head/bio_hood(src)
+	new /obj/item/weapon/clothing/under/janitor(src)
+	new /obj/item/weapon/clothing/under/janitor(src)
+	new /obj/item/weapon/clothing/shoes/black(src)
+	new /obj/item/weapon/clothing/shoes/black(src)
+	new /obj/item/weapon/flashlight
 
 /obj/closet/emcloset/New()
 	..()
