@@ -6,6 +6,11 @@ Have an idea? Submit it <a href="http://code.google.com/p/ss13/issues/list">here
 Want the source? <a href="https://OpenSVN.csie.org/goonstationsvn">Nannek/Keelin Stable on SVN</a><br>
 
 <HR>
+<P><B>Modified Saturday 14th March, 2009</B><BR>
+<li>Janitor job complete! Report any bugs to adminhelp</li>
+</ul>
+</p>
+<HR>
 <P><B>Modified Saturday 7th March, 2009</B><BR>
 <li>Wizard now needs his staff for spells</li>
 <li>Be careful with APCs now okay?!</li>
@@ -14,7 +19,6 @@ Want the source? <a href="https://OpenSVN.csie.org/goonstationsvn">Nannek/Keelin
 <li>Hackable APCs</li>
 <li>When APCs are emagged they now stay unlocked</li>
 <li>Re-did a shit tonne of admin stuff</li>
-<li>Added Janitor's job, now only the Janitor and Heads can empty disposal units</li>
 <li>New admin system is pretty much finished</li>
 <li>FINALLY backpacks can now be looked in while on the ground.</li>
 </ul>

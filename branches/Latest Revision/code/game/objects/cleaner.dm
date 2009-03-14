@@ -94,13 +94,24 @@
 		sleep(40)
 		if ((user.loc == T && user.equipped() == src && !( user.stat )))
 			src.wet -= 1
+			A:wet = 1
 			A.clean_blood()
-	else if (istype(A, /obj/bloodtemplate))
+			A:process()
+	else if ((istype(A, /obj/bloodtemplate)) || (istype(A, /turf/station)))
 		for(var/mob/O in viewers(user, null))
 			O.show_message(text("\red <B>[] begins to clean []</B>", user, A), 1)
 		var/turf/T = user.loc
+		var/turf/U = A.loc
 		sleep(40)
 		if ((user.loc == T && user.equipped() == src && !( user.stat )))
 			src.wet -= 1
+			U:wet = 1
 			del(A)
+			U:process()
+	return
+
+/turf/station/proc/process()
+	while (src.wet == 1)
+		sleep(800)
+		src.wet = 0
 	return
