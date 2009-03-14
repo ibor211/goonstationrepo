@@ -1,6 +1,6 @@
 /proc/start_events() //add stuff
 	if (!event && prob(eventchance))
-		switch(pick(1,4,5,6))
+		switch(pick(1,4,5,6,7))
 			if(1)
 				event = 1
 				world << "<FONT size = 3><B>Cent. Com. Update</B>: Meteor Alert.</FONT>"
@@ -65,16 +65,34 @@
 					world << "\red Cen. Com. has detected an ion storm near the station."
 					world << "\red Please check all AI-controlled equipment for errors."
 
+			if(7)
+				event = 1
+				world << "<FONT size = 3><B>Cent. Com. Update</B>: Anomaly Alert.</FONT>"
+				world << "\red Cen. Com. has detected high levels of radiation near the station."
+				world << "\red Please report to the Med-bay if you feel strange."
+				for(var/mob/human/H in world)
+					H.radiation += rand(5,25)
+					if (prob(10))
+						H.radiation += rand(10,30)
+					if (prob(25))
+						if (prob(75))
+							randmutb(H)
+						else
+							randmutg(H)
+				for(var/mob/monkey/M in world)
+					M.radiation += rand(5,25)
+
+
 		hadevent = 1
 		spawn(1300)
 			event = 0
 	spawn(1200)
 		start_events()
 
-/proc/force_event()
+/proc/force_event() //should have copied it but whatever
 	if (hadevent == 1)
 		return
-	switch(pick(1,4,5,6))
+	switch(pick(1,4,5,6,7))
 		if(1)
 			event = 1
 			world << "<FONT size = 3><B>Cent. Com. Update</B>: Meteor Alert.</FONT>"
@@ -137,6 +155,23 @@
 				world << "<FONT size = 3><B>Cent. Com. Update</B>: AI Alert.</FONT>"
 				world << "\red Cen. Com. has detected an ion storm near the station."
 				world << "\red Please check all AI-controlled equipment for errors."
+
+		if(7)
+			event = 1
+			world << "<FONT size = 3><B>Cent. Com. Update</B>: Anomaly Alert.</FONT>"
+			world << "\red Cen. Com. has detected high levels of radiation near the station."
+			world << "\red Please report to the Med-bay if you feel strange."
+			for(var/mob/human/H in world)
+				H.radiation += rand(5,25)
+				if (prob(10))
+					H.radiation += rand(10,30)
+				if (prob(25))
+					if (prob(75))
+						randmutb(H)
+					else
+						randmutg(H)
+			for(var/mob/monkey/M in world)
+				M.radiation += rand(5,25)
 
 	spawn(1300)
 		event = 0
