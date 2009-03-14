@@ -6,7 +6,7 @@
 			W:suffix = text("[][]", (user.equipped() == src ? "equipped " : ""), W:wet)
 			user << "\blue You wet the mop"
 		if (src.water < 1)
-			user << "/blue Out of water!"
+			user << "\blue Out of water!"
 	else if (istype(W, /obj/item/weapon/bucket))
 		if ((W:water == 20))
 			src.water = 20
@@ -26,6 +26,7 @@
 		var/mob/human/M = A
 		for(var/mob/O in viewers(user, null))
 			O.show_message(text("\red <B>[] begins to clean []'s hands</B>", user, M), 1)
+			sleep(40)
 			src.water -= 1
 			if (M.gloves)
 				M.gloves.clean_blood()
@@ -34,6 +35,7 @@
 	else if (istype(A, /obj/item/weapon))
 		for(var/mob/O in viewers(user, null))
 			O.show_message(text("\red <B>[] begins to clean []</B>", user, A), 1)
+			sleep(40)
 			src.water -= 1
 			A.clean_blood()
 	return
@@ -93,14 +95,12 @@
 		if ((user.loc == T && user.equipped() == src && !( user.stat )))
 			src.wet -= 1
 			A.clean_blood()
-			A:wet = 1
-	else if ((istype(A, /obj/bloodtemplate)) || (istype(A, /turf/station)))
+	else if (istype(A, /obj/bloodtemplate))
 		for(var/mob/O in viewers(user, null))
 			O.show_message(text("\red <B>[] begins to clean []</B>", user, A), 1)
 		var/turf/T = user.loc
 		sleep(40)
 		if ((user.loc == T && user.equipped() == src && !( user.stat )))
 			src.wet -= 1
-			A:wet = 1
 			del(A)
 	return
