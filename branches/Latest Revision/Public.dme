@@ -151,6 +151,7 @@
 #include "code\game\machinery\pipe\pipe_filter.dm"
 #include "code\game\mob\login.dm"
 #include "code\game\mob\logout.dm"
+#include "code\game\mob\medal.dm"
 #include "code\game\mob\mob.dm"
 #include "code\game\mob\ai\ai.dm"
 #include "code\game\mob\ai\death.dm"
