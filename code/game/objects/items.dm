@@ -2936,6 +2936,8 @@
 	if (M.rejuv)
 		user.show_message(text("\blue Bloodstream Analysis located [] units of rejuvenation chemicals.", M.rejuv), 1)
 	src.add_fingerprint(user)
+	if (M.stat > 1)
+		user.unlock_medal("He's Dead, Jim", 1)
 	return
 
 /obj/item/weapon/analyzer/attack_self(mob/user as mob)

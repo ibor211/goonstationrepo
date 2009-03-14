@@ -371,6 +371,7 @@
 
 	if (traitorwin)
 		world << "<B>The traitor ([ticker.killer.rname]) wins!</B>"
+		ticker.killer.unlock_medal("Mission Complete", 1)
 	else
 		world << "<B>The Research Staff has stopped the traitor ([ticker.killer.rname]) !</B>"
 	switch(ticker.objective)

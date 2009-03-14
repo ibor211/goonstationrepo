@@ -150,6 +150,7 @@
 		return
 
 	user.machine = src
+	user.unlock_medal("Peeping Tom", 1)
 
 	var/list/L = list()
 	for (var/obj/machinery/camera/C in world)

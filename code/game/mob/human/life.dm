@@ -17,6 +17,7 @@
 	var/obj/item/weapon/organ/external/Head = src.organs["head"]
 	if(src.rname != "Unknown" && src.health < -500 && (Head.get_damage() > Head.max_damage/2) && !src.wear_id)	//this could be done better :effort:
 		src.rname = "Unknown"
+		src.unlock_medal("Black And Blue", 1)
 
 	if (src.stat != 2)
 /////////////////////////////////

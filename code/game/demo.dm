@@ -667,6 +667,7 @@
 				src.desc = "Owned by [I.registered]."
 		else
 			user << "\red Access Denied"
+			user.unlock_medal("Rookie Thief", 1)
 	else if(istype(W, /obj/item/weapon/card/emag) && !src.broken)
 		src.broken = 1
 		src.locked = 0
@@ -678,6 +679,7 @@
 				O << text("\blue The locker has been broken by [user] with an electromagnetic card!")
 	else
 		user << "\red Access Denied"
+		user.unlock_medal("Rookie Thief", 1)
 	return
 
 /obj/secloset/security2/New()
@@ -885,6 +887,7 @@
 		src.icon_state = text("[]secloset0", (src.locked ? "1" : null))
 	else
 		user << "\red Access Denied"
+		user.unlock_medal("Rookie Thief", 1)
 	return
 
 /obj/secloset/relaymove(mob/user as mob)
