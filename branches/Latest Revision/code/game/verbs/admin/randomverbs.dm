@@ -248,7 +248,7 @@
 						P.oldoxy = 755985
 						P.tmpoxy = 755985
 	usr << "\blue Blowing up station ..."
-	world << "[usr.key] is being a complete cock, blame them for anything that is about to happen"
+	world << "[usr.key] is being a complete cock, blame him for anything that is about to happen"
 
 /client/proc/removeplasma()
 	set category = "Admin-Game"
