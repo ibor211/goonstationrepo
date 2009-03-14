@@ -1,5 +1,5 @@
 var
-	eventchance = 2
+	eventchance = 1
 	event = 0
 	hadevent = 0
 	blobevent = 0
