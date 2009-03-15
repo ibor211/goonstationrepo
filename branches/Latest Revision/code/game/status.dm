@@ -2,7 +2,7 @@
 	var/s = ""
 	
 	s += "Goon Station 13";
-	s += " ([src.game_version])"
+	s += " ([game_version])"
 
 	var/list/features = list()
 
