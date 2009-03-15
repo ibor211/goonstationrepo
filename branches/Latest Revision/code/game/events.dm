@@ -72,13 +72,15 @@
 				world << "\red Please report to the Med-bay if you feel strange."
 				for(var/mob/human/H in world)
 					H.radiation += rand(5,25)
-					if (prob(10))
-						H.radiation += rand(10,30)
+					if (prob(5))
+						H.radiation += rand(30,50)
 					if (prob(25))
 						if (prob(75))
 							randmutb(H)
+							domutcheck(H,null,1)
 						else
 							randmutg(H)
+							domutcheck(H,null,1)
 				for(var/mob/monkey/M in world)
 					M.radiation += rand(5,25)
 
