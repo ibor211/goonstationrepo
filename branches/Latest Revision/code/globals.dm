@@ -4,7 +4,7 @@ var
 	hadevent = 0
 	blobevent = 0
 	savefile_ver = "3"
-	version = "Nannek + Keelin Stable SVN"
+	version = "Nannek + Keelin + Stuntwaffle Stable"
 	datum/air_tunnel/air_tunnel1/SS13_airtunnel = null
 	datum/control/cellular/cellcontrol = null
 	datum/control/gameticker/ticker = null
