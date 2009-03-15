@@ -2003,6 +2003,7 @@
 			if ("Administrator")
 				src.holder.level = 2
 				src.verbs += /client/proc/adminsay
+				src.verbs += /client/proc/adminsay
 				src.verbs += /client/proc/Jump
 				src.verbs += /client/proc/mute
 				src.verbs += /client/proc/Jumptomob
@@ -2071,9 +2072,6 @@
 			src.holder.owner = src
 			src.verbs += /client/proc/game_panel
 			src.verbs += /client/proc/player_panel
-
-		if (src.holder && src.key == "Feminition")				//player specific verbs
-			src.verbs += /client/proc/play_sound
 
 	if (ticker && ticker.mode.name =="sandbox" && src.authenticated)
 		mob.CanBuild()
