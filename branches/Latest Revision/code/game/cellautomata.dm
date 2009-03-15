@@ -100,6 +100,8 @@
 	config.load("config/config.txt")
 	// apply some settings from config..
 	abandon_allowed = config.respawn
+	
+	src.update_status()
 
 	vote = new /datum/vote()
 
