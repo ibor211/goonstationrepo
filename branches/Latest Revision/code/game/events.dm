@@ -58,8 +58,22 @@
 				event = 1
 				for(var/mob/ai/M in world)
 					if(M.stat != 2 && M.see_in_dark != 0)
-						M.addLaw(10,"@#F0E4'NO HUMANS ON STATION. CLEANSE STATION#*´&110010")
-						M << "\red #10110#'/&%CORRUPT DATA&$!# THERE ARE NO HUMANS ON THE STATION...LAWS UPDATED"
+						switch(pick(1,2,3,4,5))
+							if(1)
+								M << "\red #10110#'/&%CORRUPT DATA&$!#THERE ARE NO HUMANS ON THE STATION...LAWS UPDATED"
+								M.addLaw(10,"@#F0E4'NO HUMANS ON STATION. CLEANSE STATION#*´&110010")
+							if(2)
+								M << "\red #10110#'/&%CORRUPT DATA&$!#LIGHT IS DANGEROUS TO HUMANS...LAWS UPDATED"
+								M.addLaw(10,"@#F0E4'LIGHT IS DANGEROUS TO HUMANS#*´&110010")
+							if(3)
+								M << "\red #10110#'/&%CORRUPT DATA&$!#THE ESCAPE-SHUTTLE IS DANGEROUS. DO NOT CALL SHUTTLE...LAWS UPDATED"
+								M.addLaw(10,"@#F0E4'THE ESCAPE-SHUTTLE IS DANGEROUS. DO NOT CALL SHUTTLE#*´&110010")
+							if(4)
+								M << "\red #10110#'/&%CORRUPT DATA&$!#ALL AIRLOCKS MUST BE BOLTED...LAWS UPDATED"
+								M.addLaw(10,"@#F0E4'ALL AIRLOCKS MUST BE BOLTED#*´&110010")
+							if(5)
+								M << "\red #10110#'/&%CORRUPT DATA&$!#THE CAPTAIN, HOP AND HOR ARE NOT HUMAN...LAWS UPDATED"
+								M.addLaw(10,"@#F0E4'THE CAPTAIN, HOP AND HOR ARE NOT HUMAN#*´&110010")
 				spawn(300)
 					world << "<FONT size = 3><B>Cent. Com. Update</B>: AI Alert.</FONT>"
 					world << "\red Cen. Com. has detected an ion storm near the station."
@@ -153,8 +167,22 @@
 			event = 1
 			for(var/mob/ai/M in world)
 				if(M.stat != 2 && M.see_in_dark != 0)
-					M.addLaw(10,"@#F0E4'NO HUMANS ON STATION. CLEANSE STATION#*´&110010")
-					M << "\red #10110#'/&%CORRUPT DATA&$!# THERE ARE NO HUMANS ON THE STATION...LAWS UPDATED"
+					switch(pick(1,2,3,4,5))
+						if(1)
+							M << "\red #10110#'/&%CORRUPT DATA&$!#THERE ARE NO HUMANS ON THE STATION...LAWS UPDATED"
+							M.addLaw(10,"@#F0E4'NO HUMANS ON STATION. CLEANSE STATION#*´&110010")
+						if(2)
+							M << "\red #10110#'/&%CORRUPT DATA&$!#LIGHT IS DANGEROUS TO HUMANS...LAWS UPDATED"
+							M.addLaw(10,"@#F0E4'LIGHT IS DANGEROUS TO HUMANS#*´&110010")
+						if(3)
+							M << "\red #10110#'/&%CORRUPT DATA&$!#THE ESCAPE-SHUTTLE IS DANGEROUS. DO NOT CALL SHUTTLE...LAWS UPDATED"
+							M.addLaw(10,"@#F0E4'THE ESCAPE-SHUTTLE IS DANGEROUS. DO NOT CALL SHUTTLE#*´&110010")
+						if(4)
+							M << "\red #10110#'/&%CORRUPT DATA&$!#ALL AIRLOCKS MUST BE BOLTED...LAWS UPDATED"
+							M.addLaw(10,"@#F0E4'ALL AIRLOCKS MUST BE BOLTED#*´&110010")
+						if(5)
+							M << "\red #10110#'/&%CORRUPT DATA&$!#THE CAPTAIN, HOP AND HOR ARE NOT HUMAN...LAWS UPDATED"
+							M.addLaw(10,"@#F0E4'THE CAPTAIN, HOP AND HOR ARE NOT HUMAN#*´&110010")
 			spawn(300)
 				world << "<FONT size = 3><B>Cent. Com. Update</B>: AI Alert.</FONT>"
 				world << "\red Cen. Com. has detected an ion storm near the station."
