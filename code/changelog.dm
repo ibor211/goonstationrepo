@@ -1,6 +1,6 @@
 var/changes = {"<FONT color='blue'>
 <head><title>Changelog</title></head>
-<P><B>Current Version: Nannek and Keelin Stable SVN - 305</b></p>
+<P><B>Current Version: Nannek and Keelin Stable SVN </b></p>
 <a href="http://www.maplib.net/map.php?id=3550">NEW Map Link!</a><br>
 Have an idea? Submit it <a href="http://code.google.com/p/ss13/issues/list">here!</a><br>
 Want the source? <a href="https://OpenSVN.csie.org/goonstationsvn">Nannek/Keelin Stable on SVN</a><br>
