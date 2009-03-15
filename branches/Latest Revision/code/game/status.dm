@@ -27,14 +27,13 @@
 	if (config && config.allow_ai)
 		features += "AI allowed"
 
-
 	var/n = 0
 	for (var/mob/M in world)
 		if (M.client)
 			n++
 	
 	if (n > 0)
-		features += "[n] players"
+		features += "~[n] players"
 	
 	/*
 	is there a reason for this? the byond site shows 'hosted by X' when there is a proper host already.
@@ -48,4 +47,6 @@
 	if (features)
 		s += ": [dd_list2text(features, ", ")]"
 	
-	src.status = s
+	/* does this help? I do not know */
+	if (src.status != s)
+		src.status = s
