@@ -3,6 +3,12 @@
 // New source code should be placed in .dm files: choose File/New --> Code File.
 
 // BEGIN_INTERNALS
+/*
+FILE:
+DIR: code code\game code\game\mob
+MAP_ICON_TYPE: 0
+AUTO_FILE_DIR: ON
+*/
 // END_INTERNALS
 // BEGIN_FILE_DIR
 #define FILE_DIR .
@@ -77,7 +83,9 @@
 #include "code\game\demo.dm"
 #include "code\game\events.dm"
 #include "code\game\hud.dm"
+#include "code\game\status.dm"
 #include "code\game\throwing.dm"
+#include "code\game\topic.dm"
 #include "code\game\vote.dm"
 #include "code\game\admin\admin.dm"
 #include "code\game\admin\ban.dm"

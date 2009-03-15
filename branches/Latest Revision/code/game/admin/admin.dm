@@ -1095,7 +1095,7 @@
 		world << "<B>You may now enter the game.</B>"
 	world.log_admin("[usr.key] toggled new player game entering.")
 	messageadmins("\blue[usr.key] toggled new player game entering.")
-	world.update_stat()
+	world.update_status()
 
 /obj/admins/proc/toggleAI()
 	set category = "Admin-Game"
@@ -1107,7 +1107,7 @@
 	else
 		world << "<B>The AI job is chooseable now.</B>"
 	world.log_admin("[usr.key] toggled AI allowed.")
-	world.update_stat()
+	world.update_status()
 
 /obj/admins/proc/toggleaban()
 	set category = "Admin-Game"
@@ -1120,7 +1120,7 @@
 		world << "<B>You may no longer abandon mob :(</B>"
 	messageadmins("\blue[usr.key] toggled abandon mob to [abandon_allowed ? "On" : "Off"].")
 	world.log_admin("[usr.key] toggled abandon mob to [abandon_allowed ? "On" : "Off"].")
-	world.update_stat()
+	world.update_status()
 
 /obj/admins/proc/delay()
 	set category = "Admin-Game"

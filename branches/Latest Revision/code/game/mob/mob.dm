@@ -1868,7 +1868,7 @@
 
 	if (((world.address == src.address || !(src.address)) && !(host)))
 		host = src.key
-		world.update_stat()
+		world.update_status()
 
 	..()
 	src << "\blue <B>[join_motd]</B>"
