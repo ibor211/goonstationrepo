@@ -1676,11 +1676,11 @@ obj/item/weapon/clothing/suit/labcoat
 	desc = "Caution! Wet Floor!"
 	name = "wet floor sign"
 	icon_state = "caution"
-	force = 3.0
-	throwforce = 5.0
+	force = 1.0
+	throwforce = 3.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2.0
+	w_class = 1.0
 /obj/item/weapon/ointment
 	name = "ointment"
 	icon_state = "ointment"
