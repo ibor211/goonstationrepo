@@ -1,3 +1,9 @@
+Add a chemical to chemistry that makes wet floors slippier.
+
+Add a chemical to chemistry that destroys the blob when mixed with space cleaner.
+
+Make wet mops able to stamp out fires.
+
 Sprite Keelin's black hole and wormhole.
 
 Make Forensics not suck.
