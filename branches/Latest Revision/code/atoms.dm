@@ -45,6 +45,8 @@
 /mob
 	density = 1
 	layer = 4.0
+	var/lastattacker = null
+	var/lastattacked = null
 	var/already_placed = 0.0
 	var/obj/machinery/machine = null
 	var/other_mobs = null
