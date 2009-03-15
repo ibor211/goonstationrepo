@@ -1970,7 +1970,7 @@
 				src.verbs += /proc/variables
 				src.verbs += /client/proc/modifyvariables
 				src.verbs += /client/proc/adminsay
-				src.verbs += /client/proc/play_sound
+//				src.verbs += /client/proc/play_sound
 //				src.verbs += /client/proc/modifytemperature
 //				src.verbs += /client/proc/grillify
 				src.verbs += /client/proc/Jump
@@ -2003,7 +2003,7 @@
 			if ("Administrator")
 				src.holder.level = 2
 				src.verbs += /client/proc/adminsay
-				src.verbs += /client/proc/play_sound
+//				src.verbs += /client/proc/play_sound
 				src.verbs += /client/proc/Jump
 				src.verbs += /client/proc/mute
 				src.verbs += /client/proc/Jumptomob
