@@ -42,50 +42,13 @@
 	return
 
 /obj/start/New()
-
 	..()
-	src.tag = text("start*[]", src.name)
+	src.tag = "start*[src.name]"
 	src.invisibility = 100
 	return
 
-/world/proc/update_stat()
-	src.status = "Space Station 13";
-	src.status += " ([SS13_version])"
-
-	var/list/features = list()
-
-	if (ticker && master_mode)
-		features += master_mode
-	else if (!ticker)
-		features += "<b>STARTING</b>"
-		src.status += ": [dd_list2text(features, ", ")]"
-		return
-
-	if (config && config.enable_authentication)
-		features += "goon only"
-
-	if (!enter_allowed)
-		features += "closed"
-
-	if (abandon_allowed)
-		features += abandon_allowed ? "respawn" : "no respawn"
-
-	if (config && config.allow_vote_mode)
-		features += "vote"
-
-	if (config && config.allow_ai)
-		features += "AI allowed"
-
-	if (host)
-		features += "hosted by <b>[host]</b>"
-	else if (config && config.hostedby)
-		features += "hosted by <b>[config.hostedby]</b>"
-
-	if (features)
-		src.status += ": [dd_list2text(features, ", ")]"
-
 /world/New()
-	src.update_stat()
+	src.update_status()
 
 	for (var/turf/T in world)
 		T.updatelinks()
@@ -169,7 +132,7 @@
 		cellcontrol.process()
 		return
 
-	src.update_stat()
+	src.update_status()
 
 	spawn (0)
 		sleep(900)		//*****RM was 900
@@ -193,41 +156,6 @@
 			M << sound('sound/NewRound.ogg')
 	sleep(10) // wait for sound to play
 	..()
-
-/world/Topic(T, addr, master, key)
-	world.log << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
-
-	if(T == "ping")
-		var/x = 1
-		for (var/client/C)
-			x++
-		return x
-	else if (T == "reboot" && master)
-		world.log << "TOPIC: Remote reboot from master ([addr])"
-		world.Reboot()
-	else if(T == "players")
-		var/n = 0
-		for(var/mob/M in world)
-			if(M.client)
-				n++
-		return n
-	else if (T == "status")
-		var/list/s = list()
-		s["version"] = SS13_version
-		s["mode"] = master_mode
-		s["respawn"] = config ? abandon_allowed : 0
-		s["enter"] = enter_allowed
-		s["vote"] = config.allow_vote_mode
-		s["ai"] = config.allow_ai
-		s["host"] = host ? host : null
-		s["players"] = list()
-		var/n = 0
-		for(var/mob/M in world)
-			if(M.client)
-				s["player[n]"] = M.client.key
-				n++
-		s["players"] = n
-		return list2params(s)
 
 /atom/proc/check_eye(user as mob)
 	if (istype(user, /mob/ai))
@@ -448,7 +376,7 @@
 
 	shuttle_location = shuttle_z
 
-	world.update_stat()
+	world.update_status()
 	world << "<B>Welcome to the Space Station 13!</B>\n\n"
 
 	switch (master_mode)

@@ -17,7 +17,7 @@
 
 	src.client.screen -= main_hud1.contents
 	src.client.screen -= main_hud2.contents
-	world.update_stat()
+	world.update_status()
 	if (!src.hud_used)
 		src.hud_used = main_hud1
 	src.next_move = 1
