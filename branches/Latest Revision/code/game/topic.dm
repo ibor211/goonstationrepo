@@ -23,7 +23,7 @@
 	
 	else if (T == "status")
 		var/list/s = list()
-		s["version"] = version
+		s["version"] = game_version
 		s["mode"] = master_mode
 		s["respawn"] = config ? abandon_allowed : 0
 		s["enter"] = enter_allowed
