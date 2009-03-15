@@ -2003,7 +2003,7 @@
 			if ("Administrator")
 				src.holder.level = 2
 				src.verbs += /client/proc/adminsay
-				src.verbs += /client/proc/adminsay
+				src.verbs += /client/proc/play_sound
 				src.verbs += /client/proc/Jump
 				src.verbs += /client/proc/mute
 				src.verbs += /client/proc/Jumptomob
