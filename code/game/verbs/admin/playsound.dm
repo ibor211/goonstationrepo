@@ -12,8 +12,8 @@
 		world.log_admin("[src] played sound [S]")
 		messageadmins("[src] played sound [S]")
 		world << sound(S,0,1,1)
-	else
-		usr << "Cant play Sound."
+//	else
+//		usr << "Cant play Sound."
 
 
 	//else
