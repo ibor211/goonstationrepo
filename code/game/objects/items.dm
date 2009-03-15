@@ -238,6 +238,14 @@
 	return
 
 /obj/item/weapon/proc/attack(mob/M as mob, mob/user as mob, def_zone)
+
+	/////////////////////////
+	user.lastattacked = M
+	M.lastattacker = user
+	spawn(1800)            // this wont work right
+		M.lastattacker = null
+	/////////////////////////
+
 	for(var/mob/O in viewers(M, null))
 		O.show_message(text("\red <B>[] has been attacked with [][] </B>", M, src, (user ? text(" by [].", user) : ".")), 1)
 	var/power = src.force
