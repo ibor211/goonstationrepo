@@ -71,6 +71,8 @@
 				world << "\red Cen. Com. has detected high levels of radiation near the station."
 				world << "\red Please report to the Med-bay if you feel strange."
 				for(var/mob/human/H in world)
+					if (!H.start)
+						continue
 					H.radiation += rand(5,25)
 					if (prob(5))
 						H.radiation += rand(30,50)
