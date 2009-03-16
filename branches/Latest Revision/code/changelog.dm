@@ -10,7 +10,6 @@ Want the source? <a href="https://OpenSVN.csie.org/goonstationsvn">Nannek/Keelin
 <li>Janitor job complete! Report any bugs to adminhelp</li>
 </ul>
 </p>
-<HR>
 <P><B>Modified Saturday 7th March, 2009</B><BR>
 <li>Wizard now needs his staff for spells</li>
 <li>Be careful with APCs now okay?!</li>
