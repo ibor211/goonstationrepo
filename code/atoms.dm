@@ -929,8 +929,10 @@
 	name = "hat"
 	desc = "An amish looking hat"
 	icon_state = "that"
-/obj/item/weapon/clothing/head/wig
-	name = "wig"
+/obj/item/weapon/clothing/head/pwig
+	name = "powdered wig"
+	desc = "A powdered wig"
+	icon_state = "pwig"
 /obj/item/weapon/clothing/head/wizhat
 	name = "hat"
 	desc = "A hat that seems to radiate power"
@@ -1201,6 +1203,15 @@ obj/item/weapon/clothing/suit/labcoat
 	a_filter = 9.0
 	h_filter = 9.0
 	s_istate = "wizrobe"
+	flags = FPRINT | TABLEPASS
+obj/item/weapon/clothing/suit/judgerobe
+	name = "judge's robe"
+	desc = "This robe commands authority"
+	icon_state = "jrobe"
+	fb_filter = 9.0
+	a_filter = 9.0
+	h_filter = 9.0
+	s_istate = "jrobe"
 	flags = FPRINT | TABLEPASS
 /obj/item/weapon/clothing/under
 	name = "under"
@@ -1829,6 +1840,9 @@ obj/item/weapon/clothing/suit/labcoat
 /obj/item/weapon/paper/Internal
 	name = "paper- 'Internal Atmosphere Operating Instructions'"
 	info = "Equipment:<BR>\n\t1+ Tank(s) with appropriate atmosphere<BR>\n\t1 Gas Mask w regulator (standard issue)<BR>\n<BR>\nProcedure:<BR>\n\t1. Wear mask<BR>\n\t2. Attach oxygen tank pipe to regulater (automatic))<BR>\n\t3. Set internal!<BR>\n<BR>\nNotes:<BR>\n\tDon't forget to stop internal when tank is low by<BR>\n\tremoving internal!<BR>\n<BR>\n\tDo not use a tank that has a high concentration of toxins.<BR>\n\tThe filters shut down on internal mode!<BR>\n<BR>\n\tWhen exiting a high danger environment it is advised<BR>\n\tthat you exit through a decontamination zone!<BR>\n<BR>\n\tRefill a tank at a oxygen canister by equiping the tank (Double Click)<BR>\n\tthen 'attacking' the canister (Double Click the canister)."
+/obj/item/weapon/paper/Court
+	name = "paper- 'Judgement'"
+	info = "For crimes against the station, the offender is sentenced to:<BR>\n<BR>\n"
 /obj/item/weapon/paper/Map
 	name = "paper- 'Station Blueprint'"
 	var/map_graphic = 'map.png'
@@ -3992,6 +4006,9 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	var/opened = 0
 	var/locked = 1
 	var/broken = 0
+/obj/secloset/courtroom
+	name = "Courtroom Locker"
+	req_access = list(access_heads)
 /obj/secloset/animal
 	name = "Animal Control"
 	req_access = list(access_medical_supplies)
