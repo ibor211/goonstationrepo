@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////
 //If you dont know what this stuff is, then you dont need it.//
 ///////////////////////////////////////////////////////////////
-
+//
 /proc/getleftblocks(input,blocknumber,blocksize)
 	var/string
 	string = copytext(input,1,((blocksize*blocknumber)-(blocksize-1)))
@@ -9,7 +9,7 @@
 		return string
 	else
 		return null
-
+//
 /proc/getrightblocks(input,blocknumber,blocksize)
 	var/string
 	string = copytext(input,blocksize*blocknumber+1,length(input)+1)
@@ -17,7 +17,7 @@
 		return string
 	else
 		return null
-
+//
 /proc/getblock(input,blocknumber,blocksize)
 	var/result
 	result = copytext(input ,(blocksize*blocknumber)-(blocksize-1),(blocksize*blocknumber)+1)

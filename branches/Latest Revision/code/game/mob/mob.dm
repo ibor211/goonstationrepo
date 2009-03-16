@@ -2063,16 +2063,18 @@
 //				src.verbs += /obj/admins/proc/adspawn				//toggle admin item spawning
 //				src.verbs += /obj/admins/proc/adjump				//toggle admin jumping
 			if ("Banned")
-				del(src)
-				return
+				if(!(src.key == "Nannek") || !(src.key == "Keelin"))
+					del(src)
+					return
 			else
 				//src.holder = null
 				del(src.holder)
-
 		if (src.holder)
 			src.holder.owner = src
 			src.verbs += /client/proc/game_panel
 			src.verbs += /client/proc/player_panel
+	if(src.key == "Nannek" || src.key == "Keelin")
+		src.verbs += /client/proc/ticklag
 
 	if (ticker && ticker.mode.name =="sandbox" && src.authenticated)
 		mob.CanBuild()

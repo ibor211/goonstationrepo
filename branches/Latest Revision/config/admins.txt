@@ -1,7 +1,5 @@
 stuntwaffle - Host
 slurm - Host
-nannek - Coder
-keelin - Coder
 halerina - Coder
 sledra - Primary Administrator
 rathensa - Primary Administrator

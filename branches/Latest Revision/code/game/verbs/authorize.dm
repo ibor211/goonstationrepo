@@ -7,7 +7,7 @@
 	if (!config.enable_authentication)
 		src.authenticated = 1
 		return
-
+//
 	src.authenticating = 1
 
 	spawn (rand(4, 18))
