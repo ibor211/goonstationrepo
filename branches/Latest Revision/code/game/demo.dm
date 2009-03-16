@@ -2530,6 +2530,7 @@
 		var/mob/M = A
 		if (src.wet == 1)
 			if (M.m_intent == "run")
+				M.pulling = null
 				M.inertia_dir = M.last_move
 				step(M, M.inertia_dir)
 				M << "\blue You slipped on the wet floor!"
