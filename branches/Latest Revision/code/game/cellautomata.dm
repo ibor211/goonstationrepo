@@ -100,7 +100,7 @@
 	config.load("config/config.txt")
 	// apply some settings from config..
 	abandon_allowed = config.respawn
-	
+
 	src.update_status()
 
 	vote = new /datum/vote()
@@ -444,15 +444,18 @@
 	if(time%3 == 0)
 		spawn(-1)
 			for(var/turf/space/space in world)
-				if (space.updatecell)
-					space.updatecell()
+				if (!skipupdate)
+					if (space.updatecell)
+						space.updatecell()
 			return
+	skipupdate = !skipupdate
 
 	for(var/turf/station/T in world)
 		if (T.updatecell)
 			T.updatecell()
 			if(!time)
 				T.conduction()
+
 	sleep(3)
 	for(var/mob/M in world)
 		spawn( 0 )
@@ -460,6 +463,7 @@
 				return
 			M.Life()
 			return
+
 	sleep(3)
 	for(var/obj/move/S in world)
 		S.process()

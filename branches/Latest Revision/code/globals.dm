@@ -1,4 +1,5 @@
 var
+	skipupdate = 0
 	///////////////
 	eventchance = 2 //% per 2 mins
 	event = 0
