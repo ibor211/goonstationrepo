@@ -3365,7 +3365,7 @@
 		usr.bruteloss += 10
 		usr.paralysis += 20
 		return
-	if (M.stat < 2 && prob(15))
+	if (M.stat < 2 && M.health < 50 && prob(90))
 		var/mob/H = M
 		// ******* Check
 		if ((istype(H, /mob/human) && istype(H, /obj/item/weapon/clothing/head) && H.flags & 8 && prob(80)))

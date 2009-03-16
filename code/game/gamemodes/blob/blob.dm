@@ -11,15 +11,10 @@
 	world << "You must kill it all while minimizing the damage to the station."
 
 /datum/game_mode/blob/post_setup()
-	spawn ( 0 )
-		randomchems()
+	setup_game()
 	spawn(10)
 		start_state = new /datum/station_state()
 		start_state.count()
-	spawn (3000)
-		start_events()
-	spawn ((18000+rand(3000)))
-		force_event()
 	spawn (20)
 		var/turf/T = pick(blobstart)
 

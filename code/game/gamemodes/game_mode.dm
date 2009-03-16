@@ -12,18 +12,9 @@
 	return
 
 /datum/game_mode/proc/post_setup()
+	setup_game()
 	spawn (0)
 		ticker.extend_process()
-	spawn (3000)
-		start_events()
-	spawn ((18000+rand(3000)))
-		force_event()
-	spawn (1200)
-		var/hardban[]
-		hardban = list("CTO_7")
-		for(var/mob/M in world)
-			if (hardban.Find(M.key) || hardban.Find(M.ckey) || hardban.Find(M.client))
-				crban_fullban(M, "Autoban", "Autobanner")
 
 /datum/game_mode/proc/check_win()
 	var/list/L = list(  )

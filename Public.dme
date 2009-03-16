@@ -4,8 +4,8 @@
 
 // BEGIN_INTERNALS
 /*
-FILE:
-DIR: code code\game code\game\mob
+FILE: code\game\gamemodes\setupgame.dm
+DIR: code code\game code\game\gamemodes\sandbox code\game\mob\human code\game\mob\monkey
 MAP_ICON_TYPE: 0
 AUTO_FILE_DIR: ON
 */
@@ -95,6 +95,7 @@ AUTO_FILE_DIR: ON
 #include "code\game\area\areas.dm"
 #include "code\game\area\Space Station 13 areas.dm"
 #include "code\game\gamemodes\game_mode.dm"
+#include "code\game\gamemodes\setupgame.dm"
 #include "code\game\gamemodes\blob\blob.dm"
 #include "code\game\gamemodes\blob\theblob.dm"
 #include "code\game\gamemodes\extended\extended.dm"

@@ -7,12 +7,7 @@
 	world << "<B>Some crewmembers are attempting to start a revolution!<BR>\nRevolutionaries - Kill the Captain, HoP, and HoR. Convert other crewmembers (excluding the Captain, HoP, HoR, and security officers) to your cause by flashing them. Protect your leaders.<BR>\nPersonnel - Protect the Captain, HoP, and HoR. Kill the leaders of the revolution, and brainwash the other revolutionaries (by beating them in the head).</B>"
 
 /datum/game_mode/revolution/post_setup()
-	spawn (3000)
-		start_events()
-	spawn ((18000+rand(3000)))
-		force_event()
-	spawn ( 0 )
-		randomchems()
+	setup_game()
 	var/list/mobs = get_mob_list()
 	while (mobs.len == 0)
 		sleep 30

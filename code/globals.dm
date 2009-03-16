@@ -1,8 +1,10 @@
 var
-	eventchance = 2
+	///////////////
+	eventchance = 2 //% per 2 mins
 	event = 0
 	hadevent = 0
 	blobevent = 0
+	///////////////
 	savefile_ver = "3"
 	game_version = "Nannek + Keelin + Stuntwaffle stable"
 	datum/air_tunnel/air_tunnel1/SS13_airtunnel = null
