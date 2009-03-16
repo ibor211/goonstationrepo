@@ -16,9 +16,9 @@ var
 	obj/overlay/slmaster = null
 	going = 1.0
 	master_mode = "random"//"extended"
-
+//
 	persistent_file = "data/mode.txt"
-
+//
 	nuke_code = null
 	poll_controller = null
 	datum/engine_eject/engine_eject_control = null

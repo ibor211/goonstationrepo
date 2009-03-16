@@ -10,7 +10,7 @@
 				<INPUT TYPE="hidden" name="src" value="\ref[src]">
 				<INPUT TYPE="submit" value="spawn">
 				</FORM>
-
+//
 				<SCRIPT LANGUAGE="JavaScript">
 					var OldSearch = "";
 					var ObjectList = document.Spawner.ObjectList;

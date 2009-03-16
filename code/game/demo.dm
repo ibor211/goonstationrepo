@@ -27,7 +27,7 @@
 					src.pltanks--
 		else
 	return
-
+//
 /obj/machinery/dispenser/blob_act()
 	if (prob(25))
 		while(src.o2tanks > 0)

@@ -13,7 +13,7 @@
 	var/obj/move/shuttlefloor = locate(/obj/move, T)	// fuck obj/move
 	if (isturf(T))	//let cryo/sleeper handle adjusting body temp in their respective alter_health procs
 		src.bodytemperature = adjustBodyTemp(src.bodytemperature, (shuttlefloor ? shuttlefloor.temp : T.temp), 0.5)
-/////////////////////////////////
+///////////////////////////////////
 	if (src.stat != 2)
 		if (src.firemut)
 			if (prob(25) && src.toxloss > 5)

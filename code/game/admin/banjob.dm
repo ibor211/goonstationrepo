@@ -30,7 +30,7 @@ var
 		return 1
 	else
 		return 0
-
+//
 
 /*
 /proc/jobban_key(key as text,rank as text)

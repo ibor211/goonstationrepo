@@ -32,8 +32,8 @@
 		return
 	else
 		alert("Admin revive disabled")
-
-
+//
+//
 /obj/admins/Topic(href, href_list)
 	..()
 	if (usr.client != src.owner)

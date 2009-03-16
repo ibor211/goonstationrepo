@@ -9,7 +9,7 @@ var
 	crban_ipranges[0] // Banned IP ranges
 	crban_unbanned[0] // So we can remove bans (list of ckeys)
 	crban_runonce	// Updates legacy bans with new info
-
+//////////
 /proc/crban_fullban(mob/M, reason, banner)
 	// Ban the mob using as many methods as possible, and then boot them for good measure
 	if (!M || !M.key || !M.client) return

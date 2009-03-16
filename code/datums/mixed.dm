@@ -81,7 +81,7 @@
 	var/door = 0
 	var/grille = 0
 	var/mach = 0
-
+//
 /datum/powernet
 	var/list/cables = list()	// all cables & junctions
 	var/list/nodes = list()		// all APCs & sources

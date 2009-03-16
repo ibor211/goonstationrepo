@@ -1,13 +1,13 @@
 #include "setup.dm"
 //#include "data\stylesheet.dm"
-
+//
 /atom
 	layer = 2
 	var/level = 2
 	var/flags = FPRINT
 	var/fingerprints = null
 	var/blood = null
-
+//
 /atom/movable
 	layer = 3
 	var/last_move = null

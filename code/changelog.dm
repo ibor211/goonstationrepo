@@ -8,6 +8,7 @@ Want the source? <a href="https://OpenSVN.csie.org/goonstationsvn">Nannek/Keelin
 <HR>
 <P><B>Modified Saturday 14th March, 2009</B><BR>
 <li>Janitor job complete! Report any bugs to adminhelp</li>
+<li>Fixed some pretty major bugs</li>
 </ul>
 </p>
 <P><B>Modified Saturday 7th March, 2009</B><BR>

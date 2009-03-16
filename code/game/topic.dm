@@ -1,26 +1,26 @@
 /world/Topic(T, addr, master, key)
 	world.log << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
-	
+
 	if (T == "ping")
 		var/x = 1
 		for (var/client/C)
 			x++
 		return x
-	
+//
 	/*
 	this is dumb
 	else if (T == "reboot" && master)
 		world.log << "TOPIC: Remote reboot from master ([addr])"
 		world.Reboot()
 	*/
-	
+
 	else if(T == "players")
 		var/n = 0
 		for(var/mob/M in world)
 			if(M.client)
 				n++
 		return n
-	
+
 	else if (T == "status")
 		var/list/s = list()
 		s["version"] = game_version
