@@ -715,6 +715,26 @@
 	new /obj/item/weapon/baton(src)
 	return
 
+/obj/secloset/courtroom/New()
+	..()
+	sleep(2)
+	new /obj/item/weapon/storage/flashbang_kit(src)
+	new /obj/item/weapon/handcuffs(src)
+	new /obj/item/weapon/gun/energy/taser_gun(src)
+	new /obj/item/weapon/clothing/shoes/brown(src)
+	new /obj/item/weapon/baton(src)
+	new /obj/item/weapon/paper/Court (src)
+	new /obj/item/weapon/paper/Court (src)
+	new /obj/item/weapon/paper/Court (src)
+	new /obj/item/weapon/paper/Court (src)
+	new /obj/item/weapon/paper/Court (src)
+	new /obj/item/weapon/paper/Court (src)
+	new /obj/item/weapon/paper/Court (src)
+	new /obj/item/weapon/pen (src)
+	new /obj/item/weapon/clothing/suit/judgerobe (src)
+	new /obj/item/weapon/clothing/head/pwig (src)
+	return
+
 /obj/secloset/highsec/New()
 	..()
 	sleep(2)
