@@ -2525,8 +2525,8 @@
 			A.contents += W
 	return W
 
-/turf/station/Entered(atom/movable/A as mob, atom/movable/O as obj, user as mob)
-	if ((A && !( A.anchored )))
+/turf/station/Entered(atom/A, atom/OL)
+	if (istype(A,/mob/human) || istype(A,/mob/monkey))
 		var/mob/M = A
 		if (src.wet == 1)
 			if (M.m_intent == "run")
