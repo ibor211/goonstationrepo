@@ -2505,17 +2505,19 @@
 			A.contents += W
 	return W
 
-/turf/station/Entered(mob/human/M as mob, mob/user as mob)
-	if (src.wet == 1)
-		if (M.m_intent == "run")
-			M.inertia_dir = M.last_move
-			step(M, M.inertia_dir)
-			M << "\blue You slipped on the wet floor!"
-			M.stunned = 8
-			M.weakened = 5
-		else
-			M.inertia_dir = 0
-		return
+/turf/station/Entered(atom/movable/A as mob, atom/movable/O as obj, user as mob)
+	if ((A && !( A.anchored )))
+		var/mob/M = A
+		if (src.wet == 1)
+			if (M.m_intent == "run")
+				M.inertia_dir = M.last_move
+				step(M, M.inertia_dir)
+				M << "\blue You slipped on the wet floor!"
+				M.stunned = 8
+				M.weakened = 5
+			else
+				M.inertia_dir = 0
+			return
 
 /turf/proc/ReplaceWithSpace()
 	var oldAreaArea = src.loc

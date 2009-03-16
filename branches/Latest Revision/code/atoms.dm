@@ -749,6 +749,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
+	flags = 322.0
 /obj/item/weapon/cleaner
 	desc = "Space Cleaner! Just add water."
 	name = "space cleaner"
@@ -1674,6 +1675,7 @@ obj/item/weapon/clothing/suit/labcoat
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
+	flags = 322.0
 /obj/item/weapon/caution
 	desc = "Caution! Wet Floor!"
 	name = "wet floor sign"
@@ -1683,6 +1685,7 @@ obj/item/weapon/clothing/suit/labcoat
 	throw_speed = 1
 	throw_range = 5
 	w_class = 1.0
+	flags = 322.0
 /obj/item/weapon/ointment
 	name = "ointment"
 	icon_state = "ointment"
@@ -3949,6 +3952,7 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	var/water = 0
 	flags = FPRINT
 	weight = 5000000.0
+	flags = 322.0
 /obj/watertank
 	name = "watertank"
 	icon = 'stationobjs.dmi'
