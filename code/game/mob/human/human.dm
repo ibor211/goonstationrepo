@@ -756,6 +756,7 @@
 	if ((t7 && (src.pulling && ((get_dist(src, src.pulling) <= 1 || src.pulling.loc == src.loc) && (src.client && src.client.moving)))))
 		var/turf/T = src.loc
 		. = ..()
+
 		if (src.pulling && src.pulling.loc)
 			if(!( isturf(src.pulling.loc) ))
 				src.pulling = null
@@ -801,7 +802,8 @@
 						step(src.pulling, get_dir(src.pulling.loc, T))
 						M.pulling = t
 				else
-					step(src.pulling, get_dir(src.pulling.loc, T))
+					if (src.pulling)
+						step(src.pulling, get_dir(src.pulling.loc, T))
 	else
 		src.pulling = null
 		. = ..()
