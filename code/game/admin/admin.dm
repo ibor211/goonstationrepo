@@ -56,7 +56,6 @@
 					jobs += "<a href='?src=\ref[src];jobban3=\ref[job];jobban4=\ref[M]'>[dd_replacetext(job, " ", "&nbsp")]</a> " //why doesn't this work the stupid cunt
 			body = "<br>[jobs]<br><br>"
 			dat = "<tt>[header][body]</tt>"
-			world << "[M.key] acessed jobban 2"
 			usr << browse(dat, "window=jobban2;size=700x375")
 		else
 			alert("No go away")
@@ -67,7 +66,6 @@
 		if (src.rank in list( "Administrator", "Secondary Administrator", "Primary Administrator", "Coder", "Host"  ))
 			var/mob/M = locate(href_list["jobban4"])
 			var/job = locate(href_list["jobban3"])
-			world << "[M.key] [job]"
 //			if ((M.client && M.client.holder && (M.client.holder.level >= src.level)))
 //				alert("You cannot perform this action. You must be of a higher administrative rank!")
 //				return
