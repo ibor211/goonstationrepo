@@ -442,12 +442,12 @@
 	sun.calc_position()
 
 	if(time%3 == 0)
-		spawn(-1)
-			for(var/turf/space/space in world)
-				if (!skipupdate)
+		if (!skipupdate)
+			spawn(-1)
+				for(var/turf/space/space in world)
 					if (space.updatecell)
 						space.updatecell()
-			return
+				return
 	skipupdate = !skipupdate
 
 	for(var/turf/station/T in world)
