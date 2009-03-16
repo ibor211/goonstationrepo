@@ -10,8 +10,6 @@
 	for(var/mob/M in world)
 		if(M.client && M.client.authenticated)
 			M.CanBuild()
-	spawn ( 0 )
-		randomchems()
 
 /datum/game_mode/sandbox/check_win()
 	return 1

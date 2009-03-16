@@ -8,12 +8,7 @@
 	world << "<B>Escape on the shuttle but the humans have precedence!</B>"
 
 /datum/game_mode/monkey/post_setup()
-	spawn (3000)
-		start_events()
-	spawn ((18000+rand(3000)))
-		force_event()
-	spawn ( 0 )
-		randomchems()
+	setup_game()
 	spawn (50)
 		var/list/mobs = list()
 		for (var/mob/human/M in world)
