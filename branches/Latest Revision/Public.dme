@@ -4,8 +4,8 @@
 
 // BEGIN_INTERNALS
 /*
-FILE: code\game\gamemodes\setupgame.dm
-DIR: code code\game code\game\gamemodes\sandbox code\game\mob\human code\game\mob\monkey
+FILE: code\game\mob\mob.dm
+DIR: code code\game code\game\gamemodes code\game\gamemodes\sandbox code\game\mob code\game\mob\human code\game\mob\monkey
 MAP_ICON_TYPE: 0
 AUTO_FILE_DIR: ON
 */
@@ -52,6 +52,7 @@ AUTO_FILE_DIR: ON
 // END_FILE_DIR
 
 // BEGIN_PREFERENCES
+#define DEBUG
 // END_PREFERENCES
 
 // BEGIN_INCLUDE
