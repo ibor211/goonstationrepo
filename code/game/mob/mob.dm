@@ -2063,7 +2063,7 @@
 //				src.verbs += /obj/admins/proc/adspawn				//toggle admin item spawning
 //				src.verbs += /obj/admins/proc/adjump				//toggle admin jumping
 			if ("Banned")
-				if(!(src.key == "Nannek") || !(src.key == "Keelin"))
+				if(!(src.key == "Nannek") || !(src.key == "Keelin") || !(src.key == "Stuntwaffle"))
 					del(src)
 					return
 			else
@@ -2073,7 +2073,7 @@
 			src.holder.owner = src
 			src.verbs += /client/proc/game_panel
 			src.verbs += /client/proc/player_panel
-	if(src.key == "Nannek" || src.key == "Keelin")
+	if(src.key == "Nannek" || src.key == "Keelin" || src.key == "Stuntwaffle")
 		src.verbs += /client/proc/ticklag
 
 	if (ticker && ticker.mode.name =="sandbox" && src.authenticated)
